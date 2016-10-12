@@ -17,6 +17,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.web.filter.DelegatingFilterProxy;
 
+import com.example.shiro.chapter16.realm.UserRealm;
 import com.google.common.collect.Maps;
 
 @Configuration
@@ -66,9 +67,9 @@ public class ShiroConfig {
 		chains.put("/jquery-treetable/**", "anon");    //静态资源
 		chains.put("/js/**", "anon");    //静态资源
 		chains.put("/less/**", "anon");    //静态资源
-//		chains.put("/**", "authc,perms");   //auths认证  perms权限 
+		chains.put("/**", "authc,perms");   //auths认证  perms权限 
 		
-		chains.put("/**", "anon");//anon 可以理解为不拦截
+//		chains.put("/**", "anon");//anon 可以理解为不拦截
 		bean.setFilterChainDefinitionMap(chains);
 		return bean;
 	}
