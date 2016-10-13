@@ -5,11 +5,16 @@ import java.util.Map;
 import javax.servlet.DispatcherType;
 import javax.servlet.Filter;
 
+import org.apache.shiro.cache.CacheManager;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
+import org.apache.shiro.session.mgt.eis.JavaUuidSessionIdGenerator;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.filter.authc.AnonymousFilter;
+import org.apache.shiro.web.filter.authc.FormAuthenticationFilter;
+import org.apache.shiro.web.mgt.CookieRememberMeManager;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
+import org.apache.shiro.web.servlet.SimpleCookie;
 import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
 import org.springframework.boot.context.embedded.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
@@ -17,11 +22,22 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.web.filter.DelegatingFilterProxy;
 
+import com.example.shiro.chapter16.credentials.RetryLimitHashedCredentialsMatcher;
 import com.example.shiro.chapter16.realm.UserRealm;
 import com.google.common.collect.Maps;
 
 @Configuration
 public class ShiroConfig {
+	
+//	@Bean
+//	public RetryLimitHashedCredentialsMatcher credentialsMatcher(){
+//		RetryLimitHashedCredentialsMatcher retryLimitHashedCredentialsMatcher=new RetryLimitHashedCredentialsMatcher((CacheManager) securityManager());
+//		
+//		retryLimitHashedCredentialsMatcher.setHashAlgorithmName("md5");
+//		retryLimitHashedCredentialsMatcher.setHashIterations(2);
+//		retryLimitHashedCredentialsMatcher.setStoredCredentialsHexEncoded(true);
+//		return retryLimitHashedCredentialsMatcher;
+//	}
 	
 	/**
 	 * FilterRegistrationBean
@@ -58,6 +74,7 @@ public class ShiroConfig {
 		chains.put("/login", "anon");
 		chains.put("/unauthor", "anon");
 		chains.put("/logout", "logout");
+//		chains.put("/authenticated", "formAuthenticationFilter");
 		chains.put("/base/**", "anon");     //静态资源
 		chains.put("/css/**", "anon");	    //静态资源
 		chains.put("/layer/**", "anon");    //静态资源
@@ -67,8 +84,8 @@ public class ShiroConfig {
 		chains.put("/jquery-treetable/**", "anon");    //静态资源
 		chains.put("/js/**", "anon");    //静态资源
 		chains.put("/less/**", "anon");    //静态资源
-		chains.put("/**", "authc,perms");   //auths认证  perms权限 
-		
+//		chains.put("/**", "authc,perms");   //auths认证  perms权限 
+		chains.put("/**", "authc");
 //		chains.put("/**", "anon");//anon 可以理解为不拦截
 		bean.setFilterChainDefinitionMap(chains);
 		return bean;
@@ -107,9 +124,10 @@ public class ShiroConfig {
 	 * @return
 	 */
 	@Bean
-	@DependsOn(value="lifecycleBeanPostProcessor")
+//	@DependsOn(value="lifecycleBeanPostProcessor")
 	public UserRealm userRealm() {
 		UserRealm userRealm = new UserRealm();
+//		userRealm.setCredentialsMatcher(credentialsMatcher());
 		userRealm.setCacheManager(cacheManager());
 		return userRealm;
 	}
@@ -130,4 +148,40 @@ public class ShiroConfig {
 	public LifecycleBeanPostProcessor lifecycleBeanPostProcessor() {
 		return new LifecycleBeanPostProcessor();
 	}
+	
+	
+//	@Bean
+//	public JavaUuidSessionIdGenerator sessionIdGenerator(){
+//		return new JavaUuidSessionIdGenerator();
+//	}
+//	
+//	@Bean
+//	public SimpleCookie sessionIdCookie(){
+//		SimpleCookie simpleCookie=new SimpleCookie("sid");
+//		simpleCookie.setHttpOnly(true);
+//		simpleCookie.setMaxAge(-1);
+//		return simpleCookie;
+//	}
+//	
+//	@Bean
+//	public CookieRememberMeManager rememberMeManager(){
+//		CookieRememberMeManager cookieRememberMeManager=new CookieRememberMeManager();
+//		cookieRememberMeManager.setCipherKey(#{T(org.apache.shiro.codec.Base64).decode('4AvVhmFLUs0KTA3Kprsdag==')});
+//	}
+//	
+//	@Bean
+//	public SimpleCookie rememberMeCookie(){
+//		
+//	}
+	@Bean
+	public FormAuthenticationFilter formAuthenticationFilter(){
+		FormAuthenticationFilter formAuthenticationFilter=new FormAuthenticationFilter();
+		formAuthenticationFilter.setUsernameParam("username");
+		formAuthenticationFilter.setPasswordParam("password");
+		formAuthenticationFilter.setRememberMeParam("rememberMe");
+		formAuthenticationFilter.setLoginUrl("/login");
+		return formAuthenticationFilter;
+		
+	}
+	
 }
