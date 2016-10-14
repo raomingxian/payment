@@ -129,7 +129,8 @@ public class ShiroConfig {
 	public UserRealm userRealm() {
 		UserRealm userRealm = new UserRealm();
 		userRealm.setCredentialsMatcher(new HashedCredentialsMatcher("md5"));
-		userRealm.setCacheManager(cacheManager());
+		userRealm.setCachingEnabled(false);
+//		userRealm.setCacheManager(cacheManager());
 		return userRealm;
 	}
 	
