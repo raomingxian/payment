@@ -67,7 +67,7 @@ public class ShiroConfig {
 		bean.setUnauthorizedUrl("/unauthor");
 		
 		Map<String, Filter>filters = Maps.newHashMap();
-		filters.put("perms", urlPermissionsFilter());
+//		filters.put("perms", urlPermissionsFilter());
 		filters.put("anon", new AnonymousFilter());
 		bean.setFilters(filters);
 		
