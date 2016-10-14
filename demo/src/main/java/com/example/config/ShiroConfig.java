@@ -5,6 +5,7 @@ import java.util.Map;
 import javax.servlet.DispatcherType;
 import javax.servlet.Filter;
 
+import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.cache.CacheManager;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.session.mgt.eis.JavaUuidSessionIdGenerator;
@@ -127,7 +128,7 @@ public class ShiroConfig {
 //	@DependsOn(value="lifecycleBeanPostProcessor")
 	public UserRealm userRealm() {
 		UserRealm userRealm = new UserRealm();
-//		userRealm.setCredentialsMatcher(credentialsMatcher());
+		userRealm.setCredentialsMatcher(new HashedCredentialsMatcher("md5"));
 		userRealm.setCacheManager(cacheManager());
 		return userRealm;
 	}
