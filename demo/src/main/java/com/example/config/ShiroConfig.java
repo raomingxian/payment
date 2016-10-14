@@ -64,16 +64,16 @@ public class ShiroConfig {
 		ShiroFilterFactoryBean bean = new ShiroFilterFactoryBean();
 		bean.setSecurityManager(securityManager());
 		bean.setLoginUrl("/login");
-		bean.setUnauthorizedUrl("/unauthor");
-		
+//		bean.setUnauthorizedUrl("/unauthor");
+		bean.setSuccessUrl("/index");
 		Map<String, Filter>filters = Maps.newHashMap();
 //		filters.put("perms", urlPermissionsFilter());
-		filters.put("anon", new AnonymousFilter());
+//		filters.put("anon", new AnonymousFilter());
 		bean.setFilters(filters);
 		
 		Map<String, String> chains = Maps.newHashMap();
 		chains.put("/login", "anon");
-		chains.put("/unauthor", "anon");
+//		chains.put("/unauthor", "anon");
 		chains.put("/logout", "logout");
 //		chains.put("/authenticated", "formAuthenticationFilter");
 		chains.put("/base/**", "anon");     //静态资源
@@ -184,5 +184,8 @@ public class ShiroConfig {
 		return formAuthenticationFilter;
 		
 	}
+	
+	
+
 	
 }

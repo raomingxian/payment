@@ -1,12 +1,19 @@
 package com.example.shiro.chapter16.web.controller;
 
+import com.example.shiro.chapter16.entity.Resource;
 import com.example.shiro.chapter16.entity.Role;
 import com.example.shiro.chapter16.service.ResourceService;
 import com.example.shiro.chapter16.service.RoleService;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -30,7 +37,34 @@ public class RoleController {
     @RequiresPermissions("role:view")
     @RequestMapping(method = RequestMethod.GET)
     public String list(Model model) {
-        model.addAttribute("roleList", roleService.findAll());
+    	Map<Long,String> map=new HashMap<Long,String>();
+    	List<Role> roleList=roleService.findAll();
+    	
+       
+        
+        for(Role role:roleList){
+        	StringBuilder s = new StringBuilder();
+        	List<Long> resourceIds=role.getResourceIds();
+            for(Long resourceId : resourceIds) {
+                Resource resource = resourceService.findOne(resourceId);
+
+                s.append(resource.getName());
+                s.append(",");
+            }
+            if(s.length() > 0) {
+                s.deleteCharAt(s.length() - 1);
+            }
+            map.put(role.getId(), s.toString());
+        }
+        
+        
+        model.addAttribute("roleList", roleList);
+        model.addAttribute("resourcemap", map);
+
+
+//        return s.toString();
+        
+        
         return "role/list";
     }
 
@@ -55,7 +89,23 @@ public class RoleController {
     @RequestMapping(value = "/{id}/update", method = RequestMethod.GET)
     public String showUpdateForm(@PathVariable("id") Long id, Model model) {
         setCommonData(model);
-        model.addAttribute("role", roleService.findOne(id));
+        Role role=roleService.findOne(id);
+        
+    	StringBuilder s = new StringBuilder();
+    	List<Long> resourceIds=role.getResourceIds();
+        for(Long resourceId : resourceIds) {
+            Resource resource = resourceService.findOne(resourceId);
+
+            s.append(resource.getName());
+            s.append(",");
+        }
+        if(s.length() > 0) {
+            s.deleteCharAt(s.length() - 1);
+        }
+       
+       
+        model.addAttribute("role", role);
+        model.addAttribute("resourcename", s.toString());
         model.addAttribute("op", "修改");
         return "role/edit";
     }

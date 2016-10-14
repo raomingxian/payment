@@ -1,7 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@taglib prefix="zhangfn" uri="http://github.com/zhangkaitao/tags/zhang-functions" %>
 <html>
 <head>
     <title></title>
@@ -32,7 +31,7 @@
         <div class="form-group">
             <form:label path="resourceIds">拥有的资源列表：</form:label>
             <form:hidden path="resourceIds"/>
-            <input type="text" id="resourceName" name="resourceName" value="${zhangfn:resourceNames(role.resourceIds)}" readonly>
+            <input type="text" id="resourceName" name="resourceName" value="${resourcename}" readonly>
             <a id="menuBtn" href="#">选择</a>
         </div>
 
@@ -70,10 +69,14 @@
             var zNodes =[
                 <c:forEach items="${resourceList}" var="r">
                 <c:if test="${not r.rootNode}">
-                { id:${r.id}, pId:${r.parentId}, name:"${r.name}", checked:${zhangfn:in(role.resourceIds, r.id)}},
+           { id:${r.id}, pId:${r.parentId}, name:"${r.name}", checked:fuc()},
                 </c:if>
                 </c:forEach>
             ];
+            
+           var fuc= function checkIn(){
+            	true;
+            }
 
             function onCheck(e, treeId, treeNode) {
                 var zTree = $.fn.zTree.getZTreeObj("tree"),

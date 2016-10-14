@@ -5,6 +5,9 @@ import com.example.shiro.chapter16.entity.User;
 import com.example.shiro.chapter16.service.ResourceService;
 import com.example.shiro.chapter16.service.UserService;
 import com.example.shiro.chapter16.web.bind.annotation.CurrentUser;
+
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,9 +30,10 @@ public class IndexController {
     private UserService userService;
 
     @RequestMapping(value={"/","/index"})
-    public String index(@CurrentUser User loginUser, Model model) {
-//        Set<String> permissions = userService.findPermissions(loginUser.getUsername());
-    	Set<String> permissions = userService.findPermissions("admin");
+    public String index( Model model) {
+    	Subject currentUser = SecurityUtils.getSubject();
+    	String username = (String)currentUser.getPrincipal();
+    	Set<String> permissions = userService.findPermissions(username);
         List<Resource> menus = resourceService.findMenus(permissions);
         model.addAttribute("menus", menus);
         return "index";
