@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 	<head>
 		<meta charset="utf-8" />
-		<title>广丰财政局</title>
+		<title>广丰财政</title>
 
 		<meta name="keywords" content="" />
-		<meta name="description" content="广丰财政局" />
+		<meta name="description" content="" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 		<!-- basic styles -->
@@ -24,7 +23,10 @@
 		<link rel="stylesheet" href="/assets/css/datepicker.css" />
 		<link rel="stylesheet" href="/assets/css/ui.jqgrid.css" />
 
-		
+		<!-- fonts -->
+
+		<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,300" />
+
 		<!-- ace styles -->
 
 		<link rel="stylesheet" href="/assets/css/ace.min.css" />
@@ -61,6 +63,7 @@
 				<a class="menu-toggler" id="menu-toggler" href="#">
 					<span class="menu-text"></span>
 				</a>
+
 				<div th:replace="includes/sidebar :: sidebar"/>
 				
 
@@ -73,13 +76,13 @@
 						<ul class="breadcrumb">
 							<li>
 								<i class="icon-home home-icon"></i>
-								<a href="#">Home</a>
+								<a href="#">主页</a>
 							</li>
 
 							<li>
-								<a href="#">Tables</a>
+								<a href="#">业务管理</a>
 							</li>
-							<li class="active">jqGrid plugin</li>
+							<li class="active">指标管理</li>
 						</ul><!-- .breadcrumb -->
 
 						<div class="nav-search" id="nav-search">
@@ -101,60 +104,30 @@
 
 								<div class="alert alert-info">
 									<i class="icon-hand-right"></i>
-									<input type="BUTTON" id="adduser" value="add" />
 
-									 <input type="BUTTON" id="edituser" value="Edit Selected" />
-									
+									Please note that demo server is not configured to save the changes, therefore you may get an error message.
+									<button class="close" data-dismiss="alert">
+										<i class="icon-remove"></i>
+									</button>
 								</div>
 
 								<table id="grid-table"></table>
 
 								<div id="grid-pager"></div>
-<script type="text/javascript">
+
+								<script type="text/javascript">
 									var $path_base = "/";//this will be used in gritter alerts containing images
 								</script>
-							
 
 								<!-- PAGE CONTENT ENDS -->
 							</div><!-- /.col -->
 						</div><!-- /.row -->
 					</div><!-- /.page-content -->
 				</div><!-- /.main-content -->
-
-				<div class="ace-settings-container" id="ace-settings-container">
-					<div class="btn btn-app btn-xs btn-warning ace-settings-btn" id="ace-settings-btn">
-						<i class="icon-cog bigger-150"></i>
-					</div>
-
-					<div class="ace-settings-box" id="ace-settings-box">
-						<div>
-							<div class="pull-left">
-								<select id="skin-colorpicker" class="hide">
-									<option data-skin="default" value="#438EB9">#438EB9</option>
-									<option data-skin="skin-1" value="#222A2D">#222A2D</option>
-									<option data-skin="skin-2" value="#C6487E">#C6487E</option>
-									<option data-skin="skin-3" value="#D0D0D0">#D0D0D0</option>
-								</select>
-							</div>
-							<span>&nbsp; 选择皮肤</span>
-						</div>
-
-						
-
-						<div>
-							<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-rtl" />
-							<label class="lbl" for="ace-settings-rtl"> 左右切换 (rtl)</label>
-						</div>
-
-						<div>
-							<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-add-container" />
-							<label class="lbl" for="ace-settings-add-container">
-								缩小边框
-								<b>.container</b>
-							</label>
-						</div>
-					</div>
-				</div><!-- /#ace-settings-container -->
+			
+			<div th:replace="includes/container :: container"/>
+				
+				
 			</div><!-- /.main-container-inner -->
 
 			<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
@@ -162,21 +135,30 @@
 			</a>
 		</div><!-- /.main-container -->
 
-
-		
-		
+		<!-- basic scripts -->
 
 		<!--[if !IE]> -->
 
-		
-			<script src='/assets/js/jquery-2.0.3.min.js'/>
-		
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 
 		<!-- <![endif]-->
-<!--[if IE]>
-		
- <script src='/assets/js/jquery-1.10.2.min.js'/>
 
+		<!--[if IE]>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<![endif]-->
+
+		<!--[if !IE]> -->
+
+		<script type="text/javascript">
+			<script src='/assets/js/jquery-2.0.3.min.js'/>
+		</script>
+
+		<!-- <![endif]-->
+
+		<!--[if IE]>
+<script type="text/javascript">
+ <script src='/assets/js/jquery-1.10.2.min.js'/>
+</script>
 <![endif]-->
 
 	<!-- <script type="text/javascript">
@@ -198,7 +180,7 @@
 
 		<!-- inline scripts related to this page -->
 
-		<script src="/js/user.js" th:inline="javascript"/>
+		<script src="/js/payment.js"/>
 			
 	<!-- <div style="display:none"><script src='http://v7.cnzz.com/stat.php?id=155540&web_id=155540' language='JavaScript' charset='gb2312'></script></div> -->
 </body>

@@ -30,12 +30,10 @@
 					<groupId>org.springframework.boot</groupId>
 					<artifactId>spring-boot-starter-logging</artifactId>
 				</exclusion>
-			</exclusions>
+			</exclusions> 
 		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
+		
+		
 		<dependency>
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-commons</artifactId>
@@ -50,20 +48,7 @@
 			<groupId>com.lmax</groupId>
 			<artifactId>disruptor</artifactId>
 			<version>3.3.4</version>
-		</dependency>
-
-		<!-- Server -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-tomcat</artifactId>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.tomcat.embed</groupId>
-			<artifactId>tomcat-embed-jasper</artifactId>
-			<scope>provided</scope>
-		</dependency>
-		
+		</dependency>		
 
 		<!-- Test -->
 		<dependency>
