@@ -20,7 +20,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.web.filter.DelegatingFilterProxy;
 
-import com.gfcz.shiro.chapter16.realm.UserRealm;
+import com.gfcz.shiro.realm.UserRealm;
 import com.google.common.collect.Maps;
 
 import at.pollux.thymeleaf.shiro.dialect.ShiroDialect;

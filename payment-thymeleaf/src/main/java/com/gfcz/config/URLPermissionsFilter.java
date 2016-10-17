@@ -15,7 +15,7 @@ import org.apache.shiro.web.filter.authz.PermissionsAuthorizationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.gfcz.shiro.chapter16.service.UserService;
+import com.gfcz.shiro.service.UserService;
 
 
 
