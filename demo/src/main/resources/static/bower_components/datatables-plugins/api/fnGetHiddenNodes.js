@@ -10,8 +10,8 @@
  *  @author [Allan Jardine](http://sprymedia.co.uk)
  *  @deprecated
  *
- *  @example
- *    var table = $('#example').dataTable();
+ *  @gfcz
+ *    var table = $('#gfcz').dataTable();
  *    var nodes = table.fnGetHiddenNodes();
  */
 

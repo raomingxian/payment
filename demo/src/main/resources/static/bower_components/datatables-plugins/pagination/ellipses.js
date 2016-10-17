@@ -18,9 +18,9 @@
  * @summary Show ellipses in the pagination control where there is a gap in numbers
  * @deprecated
  * @author [Dave Kennedy](http://daveden.wordpress.com/)
- * @example
+ * @gfcz
  *     $(document).ready(function() {
- *         $('#example').dataTable({
+ *         $('#gfcz').dataTable({
  *             'sPaginationType': 'ellipses'
  *         });
  *     });

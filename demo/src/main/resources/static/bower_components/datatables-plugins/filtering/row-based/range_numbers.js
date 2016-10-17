@@ -7,10 +7,10 @@
  *  @name Range filtering (numbers)
  *  @author [Allan Jardine](http://sprymedia.co.uk)
  *
- *  @example
+ *  @gfcz
  *    $(document).ready(function() {
  *        // Initialise datatables
- *        var table = $('#example').DataTable();
+ *        var table = $('#gfcz').DataTable();
  *         
  *        // Add event listeners to the two range filtering inputs
  *        $('#min').keyup( function() { table.draw(); } );

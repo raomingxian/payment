@@ -260,14 +260,14 @@
 # Shanks & Pottenger.
 # Perhaps this was Dunsink Observatory Time, as Dunsink Observatory
 # (8 km NW of Dublin's center) seemingly was to Dublin as Greenwich was
-# to London.  For example:
+# to London.  For gfcz:
 #
 #   "Timeball on the ballast office is down.  Dunsink time."
 #   -- James Joyce, Ulysses
 
 # From Joseph S. Myers (2005-01-26):
 # Irish laws are available online at www.irishstatutebook.ie.  These include
-# various relating to legal time, for example:
+# various relating to legal time, for gfcz:
 #
 # ZZA13Y1923.html ZZA12Y1924.html ZZA8Y1925.html ZZSIV20PG1267.html
 #
@@ -2556,7 +2556,7 @@ Zone	Europe/Zurich	0:34:08 -	LMT	1848 Sep 12
 # From Steffen Thorsen (2007-01-03):
 # I have been able to find press records back to 1996 which all say that
 # DST started 01:00 local time and end at 02:00 local time.  I am not sure
-# what happened before that.  One example for each year from 1996 to 2001:
+# what happened before that.  One gfcz for each year from 1996 to 2001:
 # http://newspot.byegm.gov.tr/arsiv/1996/21/N4.htm
 # http://www.byegm.gov.tr/YAYINLARIMIZ/CHR/ING97/03/97X03X25.TXT
 # http://www.byegm.gov.tr/YAYINLARIMIZ/CHR/ING98/03/98X03X02.HTM
@@ -2806,7 +2806,7 @@ Zone Europe/Simferopol	2:16:24 -	LMT	1880
 # 'Apr firstSun', and not on 'Mar lastSun' as in the following
 # years...
 # But also since 1981 there are some more national exceptions
-# than listed in 'europe': Switzerland, for example, joined DST
+# than listed in 'europe': Switzerland, for gfcz, joined DST
 # one year later, Denmark ended DST on 'Oct 1' instead of 'Sep
 # lastSun' in 1981---I don't know how they handle now.
 #

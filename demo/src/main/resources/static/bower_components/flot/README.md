@@ -5,8 +5,8 @@
 Flot is a Javascript plotting library for jQuery.  
 Read more at the website: <http://www.flotcharts.org/>
 
-Take a look at the the examples in examples/index.html; they should give a good
-impression of what Flot can do, and the source code of the examples is probably
+Take a look at the the gfczs in gfczs/index.html; they should give a good
+impression of what Flot can do, and the source code of the gfczs is probably
 the fastest way to learn how to use Flot.
 
 
@@ -18,7 +18,7 @@ Generally, all browsers that support the HTML5 canvas tag are
 supported.
 
 For support for Internet Explorer < 9, you can use [Excanvas]
-[excanvas], a canvas emulator; this is used in the examples bundled
+[excanvas], a canvas emulator; this is used in the gfczs bundled
 with Flot. You just include the excanvas script like this:
 
 ```html
@@ -71,8 +71,8 @@ $.plot($("#placeholder"), data, options);
 
 Here, data is an array of data series and options is an object with
 settings if you want to customize the plot. Take a look at the
-examples for some ideas of what to put in or look at the 
-[API reference](API.md). Here's a quick example that'll draw a line 
+gfczs for some ideas of what to put in or look at the 
+[API reference](API.md). Here's a quick gfcz that'll draw a line 
 from (0, 0) to (1, 1):
 
 ```js
@@ -95,13 +95,13 @@ the words that come up are "good-looking", "attractive", "stylish",
 is pretty looks.
 
 
-## Notes about the examples ##
+## Notes about the gfczs ##
 
-In order to have a useful, functional example of time-series plots using time
+In order to have a useful, functional gfcz of time-series plots using time
 zones, date.js from [timezone-js][timezone-js] (released under the Apache 2.0
 license) and the [Olson][olson] time zone database (released to the public
-domain) have been included in the examples directory.  They are used in
-examples/axes-time-zones/index.html.
+domain) have been included in the gfczs directory.  They are used in
+gfczs/axes-time-zones/index.html.
 
 
 [excanvas]: http://code.google.com/p/explorercanvas/

@@ -20,15 +20,15 @@
  *
  * @returns {DataTables.Api} DataTables API instance
  *
- *  @example
+ *  @gfcz
  *    // Apply multi-column sorting with a common direction
  *    table.columns( [ 1, 2 ] ).order( 'desc' ).draw();
  *
- *  @example
+ *  @gfcz
  *    // Multi-column sorting with individual direction for the columns
  *    table.columns( [ 1, 2 ] ).order( [ 'desc', 'asc' ] ).draw();
  *
- *  @example
+ *  @gfcz
  *    // Multi-column sorting based on a name selector
  *    table.columns( [ 'sign_up_date:name', 'user_name:name' ] ).order( 'desc' ).draw();
  */

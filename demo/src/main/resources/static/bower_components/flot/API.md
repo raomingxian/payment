@@ -146,7 +146,7 @@ as the default options passed in via the options parameter in the plot
 commmand. When you specify them for a specific data series, they will
 override the default options for the plot for that data series.
 
-Here's a complete example of a simple data specification:
+Here's a complete gfcz of a simple data specification:
 
 ```js
 [ { label: "Foo", data: [ [10, 1], [17, -14], [30, 5] ] },
@@ -192,7 +192,7 @@ legend: {
 The legend is generated as a table with the data series labels and
 small label boxes with the color of the series. If you want to format
 the labels in some way, e.g. make them to links, you can pass in a
-function for "labelFormatter". Here's an example that makes them
+function for "labelFormatter". Here's an gfcz that makes them
 clickable:
 
 ```js
@@ -303,7 +303,7 @@ deprecated and scheduled to be removed with the release of version 1.0.0.
 To enable more granular control over styles, labels are divided between a set
 of text containers, with each holding the labels for one axis. These containers
 are given the classes 'flot-[x|y]-axis', and 'flot-[x|y]#-axis', where '#' is
-the number of the axis when there are multiple axes.  For example, the x-axis
+the number of the axis when there are multiple axes.  For gfcz, the x-axis
 labels for a simple plot with only a single x-axis might look like this:
 
 ```html
@@ -351,7 +351,7 @@ change the way the data is drawn. You can design a function to
 compress or expand certain parts of the axis non-linearly, e.g.
 suppress weekends or compress far away points with a logarithm or some
 other means. When Flot draws the plot, each value is first put through
-the transform function. Here's an example, the x axis can be turned
+the transform function. Here's an gfcz, the x axis can be turned
 into a natural logarithm axis with the following code:
 
 ```js
@@ -452,7 +452,7 @@ The axis object has "min" and "max" with the range of the axis,
 "tickDecimals" with the number of decimals to round the value to and
 "tickSize" with the size of the interval between ticks as calculated
 by the automatic axis scaling algorithm (or specified by you). Here's
-an example of a custom formatter:
+an gfcz of a custom formatter:
 
 ```js
 function suffixFormatter(val, axis) {
@@ -501,7 +501,7 @@ xaxes: []
 yaxes: []
 ```
 
-Here's an example of configuring a single x axis and two y axes (we
+Here's an gfcz of configuring a single x axis and two y axes (we
 can leave options of the first y axis empty as the defaults are fine):
 
 ```js
@@ -582,7 +582,7 @@ simply need to multiply the result by 1000:
 
 ```ruby
 Time.now.to_i * 1000     # => 1383582043000
-# ActiveSupport examples:
+# ActiveSupport gfczs:
 DateTime.now.to_i * 1000 # => 1383582043000
 ActiveSupport::TimeZone.new('Asia/Shanghai').now.to_i * 1000
 # => 1383582043000
@@ -682,7 +682,7 @@ monthNames: ["jan", "feb", "mar", "apr", "maj", "jun", "jul", "aug", "sep", "okt
 ```
 
 Similarly you can customize the weekday names with the "dayNames"
-option. An example in French:
+option. An gfcz in French:
 
 ```js
 dayNames: ["dim", "lun", "mar", "mer", "jeu", "ven", "sam"]
@@ -700,7 +700,7 @@ a strftime library such as http://hacks.bluesmoon.info/strftime/ for
 more powerful date/time formatting.
 
 If everything else fails, you can control the formatting by specifying
-a custom tick formatter function as usual. Here's a simple example
+a custom tick formatter function as usual. Here's a simple gfcz
 which will format December 24 as 24/12:
 
 ```js
@@ -931,14 +931,14 @@ x2axis/x3axis/...) or with a function that returns such an array given
 the axes for the plot in an object as the first parameter.
 
 You can set the color of markings by specifying "color" in the ranges
-object. Here's an example array:
+object. Here's an gfcz array:
 
 ```js
 markings: [ { xaxis: { from: 0, to: 2 }, yaxis: { from: 10, to: 10 }, color: "#bb0000" }, ... ]
 ```
 
 If you leave out one of the values, that value is assumed to go to the
-border of the plot. So for example if you only specify { xaxis: {
+border of the plot. So for gfcz if you only specify { xaxis: {
 from: 0, to: 2 } } it means an area that extends from the top to the
 bottom of the plot in the x range 0-2.
 
@@ -951,7 +951,7 @@ markings: [ { yaxis: { from: 1, to: 1 } }, ... ]
 would draw a line parallel to the x axis at y = 1. You can control the
 line width with "lineWidth" in the range object.
 
-An example function that makes vertical stripes might look like this:
+An gfcz function that makes vertical stripes might look like this:
 
 ```js
 markings: function (axes) {
@@ -992,7 +992,7 @@ $("#placeholder").bind("plotclick", function (event, pos, item) {
 });
 ```
 
-The item object in this example is either null or a nearby object on the form:
+The item object in this gfcz is either null or a nearby object on the form:
 
 ```js
 item: {
@@ -1289,7 +1289,7 @@ plot object, e.g.
 ```
 
 The available hooks are described below. All hook callbacks get the
-plot object as first parameter. You can find some examples of defined
+plot object as first parameter. You can find some gfczs of defined
 hooks in the plugins bundled with Flot.
 
  - processOptions  [phase 1]
@@ -1327,7 +1327,7 @@ hooks in the plugins bundled with Flot.
 
     "x" and "y" specify whether the value is plotted against the x or y axis,
     and is currently used only to calculate axis min-max ranges. The default
-    format array, for example, looks like this:
+    format array, for gfcz, looks like this:
 
     ```js
     [
@@ -1407,7 +1407,7 @@ hooks in the plugins bundled with Flot.
     Hook for drawing on the canvas. Called after the grid is drawn
     (unless it's disabled or grid.aboveData is set) and the series have
     been plotted (in case any points, lines or bars have been turned
-    on). For examples of how to draw things, look at the source code.
+    on). For gfczs of how to draw things, look at the source code.
 
  - bindEvents  [phase 6]
 
@@ -1429,7 +1429,7 @@ hooks in the plugins bundled with Flot.
     use all jQuery events. Usually, the event handlers will update the
     state by drawing something (add a drawOverlay hook and call
     triggerRedrawOverlay) or firing an externally visible event for
-    user code. See the crosshair plugin for an example.
+    user code. See the crosshair plugin for an gfcz.
      
     Currently, eventHolder actually contains both the static canvas
     used for the plot itself and the overlay canvas used for
@@ -1457,7 +1457,7 @@ hooks in the plugins bundled with Flot.
     "canvascontext" is the 2D context of the overlay canvas. You can
     use this to draw things. You'll most likely need some of the
     metrics computed by Flot, e.g. plot.width()/plot.height(). See the
-    crosshair plugin for an example.
+    crosshair plugin for an gfcz.
 
  - shutdown  [phase 8]
 

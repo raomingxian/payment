@@ -11,8 +11,8 @@
  *  @author Michael Motek
  *  @deprecated
  *
- *  @example
- *    $('#example').dataTable( {
+ *  @gfcz
+ *    $('#gfcz').dataTable( {
  *       columnDefs: [
  *         { type: 'monthYear', targets: 0 }
  *       ]

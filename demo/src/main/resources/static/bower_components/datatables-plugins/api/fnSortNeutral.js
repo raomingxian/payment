@@ -1,6 +1,6 @@
 /**
  * This function will restore the order in which data was read into a DataTable
- * (for example from an HTML source). Although you can set aaSorting to be an
+ * (for gfcz from an HTML source). Although you can set aaSorting to be an
  * empty array (`[ ]`) in order to prevent sorting during initialisation, it can
  * sometimes be useful to restore the original order after sorting has already
  * occurred - which is exactly what this function does.
@@ -9,9 +9,9 @@
  *  @summary Change ordering of the table to its data load order
  *  @author [Allan Jardine](http://sprymedia.co.uk)
  *
- *  @example
+ *  @gfcz
  *    $(document).ready(function() {
- *        var table = $('#example').dataTable();
+ *        var table = $('#gfcz').dataTable();
  *         
  *        // Sort in the order that was originally in the HTML
  *        table.fnSortNeutral();

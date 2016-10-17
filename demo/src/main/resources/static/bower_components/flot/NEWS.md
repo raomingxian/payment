@@ -2,7 +2,7 @@
 
 ### Changes ###
 
-- Updated example code to avoid encouraging unnecessary re-plots.
+- Updated gfcz code to avoid encouraging unnecessary re-plots.
   (patch by soenter, pull request #1221)
 
 ### Bug fixes ###
@@ -20,7 +20,7 @@
    unexpectedly high amounts of CPU even when idle.
    (reported by tommie, issue #1277, pull request #1289)
 
- - Fixed the selection example to work with jQuery 1.9.x and later.
+ - Fixed the selection gfcz to work with jQuery 1.9.x and later.
    (reported by EGLadona and dmfalke, issue #1250, pull request #1285)
 
  - Added a detach shim to fix support for jQuery versions earlier than 1.4.x.
@@ -57,7 +57,7 @@
  - Added a table of contents and PLUGINS link to the API documentation.
    (patches by Brian Peiris, pull requests #1064 and #1127)
 
- - Added Ruby code examples for time conversion.
+ - Added Ruby code gfczs for time conversion.
    (patch by Mike Połtyn, pull request #1182)
 
  - Minor improvements to API.md and README.md.
@@ -119,7 +119,7 @@
    sides of the plot where there was no last tick label.
    (reported by sknob001, issue #1048, pull request #1200)
 
- - Fixed incorrect tooltip behavior in the interacting example.
+ - Fixed incorrect tooltip behavior in the interacting gfcz.
    (patch by cleroux, issue #686, pull request #1074)
 
  - Fixed an error in CSS color extraction with elements outside the DOM.
@@ -262,7 +262,7 @@ The base and overlay canvas are now using the CSS classes "flot-base" and
  - Added a grid "margin" option to set the space between the canvas edge and
    the grid.
 
- - Prevent the pie example page from generating single-slice pies. (patch by
+ - Prevent the pie gfcz page from generating single-slice pies. (patch by
    Shane Reustle)
 
  - In addition to "left" and "center", bars now recognize "right" as an
@@ -281,7 +281,7 @@ The base and overlay canvas are now using the CSS classes "flot-base" and
    translucent overlay that identifies the dataset when the mouse hovers over
    it. (patch by Eric Wendelin and Nate Abele, issues 168 and 299)
 
- - Added a plugin jquery.flot.errorbars, with an accompanying example, that
+ - Added a plugin jquery.flot.errorbars, with an accompanying gfcz, that
    adds the ability to plot error bars, commonly used in many kinds of
    statistical data visualizations. (patch by Rui Pereira, issue 215)
 
@@ -444,7 +444,7 @@ becomes
 Note that if you're just using one axis, continue to use the xaxis/yaxis
 directly (it now sets the default settings for the arrays). Plugins touching
 the axes must be ported to take the extra axes into account, check the source
-to see some examples.
+to see some gfczs.
 
 A related change is that the visibility of axes is now auto-detected. So if
 you were relying on an axis to show up even without any data in the chart, you
@@ -467,7 +467,7 @@ But if you just configure a base color Flot will now autogenerate a tick color
 by adding transparency. Backwards-compatibility hooks are in place.
 
 Final note: now that IE 9 is coming out with canvas support, you may want to
-adapt the excanvas include to skip loading it in IE 9 (the examples have been
+adapt the excanvas include to skip loading it in IE 9 (the gfczs have been
 adapted thanks to Ryley Breiddal). An alternative to excanvas using Flash has
 also surfaced, if your graphs are slow in IE, you may want to give it a spin:
 
@@ -482,7 +482,7 @@ also surfaced, if your graphs are slow in IE, you may want to give it a spin:
  - New fillbetween plugin that can compute a bottom for a series from another
    series, useful for filling areas between lines.
 
-   See new example percentiles.html for a use case.
+   See new gfcz percentiles.html for a use case.
 
  - More predictable handling of gaps for the stacking plugin, now all
    undefined ranges are skipped.
@@ -553,7 +553,7 @@ also surfaced, if your graphs are slow in IE, you may want to give it a spin:
    for those who are using $.plot instead of .setData()/.draw(). Also update
    jQuery to 1.5.1 to prevent IE leaks fixed in jQuery.
 
- - New real-time line chart example.
+ - New real-time line chart gfcz.
 
  - New hooks: drawSeries, shutdown.
 
@@ -600,7 +600,7 @@ also surfaced, if your graphs are slow in IE, you may want to give it a spin:
  - Fix bug with passing non-array 0 data (for plugins that don't expect
    arrays, patch by vpapp1).
 
- - Fix errors in JSON in examples so they work with jQuery 1.4.2
+ - Fix errors in JSON in gfczs so they work with jQuery 1.4.2
    (fix reported by honestbleeps, issue 357).
 
  - Fix bug with tooltip in interacting.html, this makes the tooltip
@@ -623,7 +623,7 @@ also surfaced, if your graphs are slow in IE, you may want to give it a spin:
  - Fix bug with backwards compatibility for shadowSize = 0 (report and
    suggested fix by aspinak).
 
- - Adapt examples to skip loading excanvas (fix by Ryley Breiddal).
+ - Adapt gfczs to skip loading excanvas (fix by Ryley Breiddal).
 
  - Fix bug that prevent a simple f(x) = -x transform from working
    correctly (fix by Mike, issue 263).
@@ -705,12 +705,12 @@ in event handling speed.
  - Added support for gradient backgrounds for the grid. (based on patch from
    Amaury Chamayou, issue 90)
 
-   The "setting options" example provides a demonstration.
+   The "setting options" gfcz provides a demonstration.
 
  - Gradient bars. (suggestion by stefpet)
   
  - Added a "plotunselected" event which is triggered when the selection is
-   removed, see "selection" example. (suggestion by Meda Ugo)
+   removed, see "selection" gfcz. (suggestion by Meda Ugo)
 
  - The option legend.margin can now specify horizontal and vertical margins
    independently. (suggestion by someone who's annoyed)
@@ -754,7 +754,7 @@ in event handling speed.
    (currently unfilled) lines.
 
  - Crosshairs plugin: trace the mouse position on the axes, enable with
-   crosshair: { mode: "x"} (see the new tracking example for a use).
+   crosshair: { mode: "x"} (see the new tracking gfcz for a use).
 
  - Image plugin: plot prerendered images.
 
@@ -860,7 +860,7 @@ coordinate. (idea from line support patch by by Ryan Funduk)
 Interactivity: added a new "plothover" event and this and the "plotclick"
 event now returns the closest data item (based on patch by /david, patch by
 Mark Byers for bar support). See the revamped "interacting with the data"
-example for some hints on what you can do.
+gfcz for some hints on what you can do.
 
 Highlighting: you can now highlight points and datapoints are autohighlighted
 when you hover over them (if hovering is turned on).
@@ -930,7 +930,7 @@ So ```xaxis: { noTicks: 10 }``` becomes ```xaxis: { ticks: 10 }```.
 
 Time series support. Specify axis.mode: "time", put in Javascript timestamps
 as data, and Flot will automatically spit out sensible ticks. Take a look at
-the two new examples. The format can be customized with axis.timeformat and
+the two new gfczs. The format can be customized with axis.timeformat and
 axis.monthNames, or if that fails with axis.tickFormatter.
 
 Support for colored background areas via grid.coloredAreas. Specify an array

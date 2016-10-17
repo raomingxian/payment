@@ -28,22 +28,22 @@
 		Please note that as with all other configuration options for Responsive, this option is an extension to the [default set of DataTables options](/reference/init). This property should be set in the DataTables initialisation object.
 	</description>
 
-	<example title="Enable Responsive for a table"><![CDATA[
+	<gfcz title="Enable Responsive for a table"><![CDATA[
 
-$('#example').DataTable( {
+$('#gfcz').DataTable( {
 	responsive: true
 } );
 
-]]></example>
+]]></gfcz>
 
-	<example title="Enable Responsive with configuration options"><![CDATA[
+	<gfcz title="Enable Responsive with configuration options"><![CDATA[
 
-$('#example').DataTable( {
+$('#gfcz').DataTable( {
 	responsive: {
 		details: false
 	}
 } );
 
-]]></example>
+]]></gfcz>
 
 </dt-option>

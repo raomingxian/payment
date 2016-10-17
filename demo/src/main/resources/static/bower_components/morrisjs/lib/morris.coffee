@@ -21,7 +21,7 @@ class Morris.EventEmitter
 
 # Make long numbers prettier by inserting commas.
 #
-# @example
+# @gfcz
 #   Morris.commas(1234567) -> '1,234,567'
 Morris.commas = (num) ->
   if num?
@@ -38,6 +38,6 @@ Morris.commas = (num) ->
 
 # Zero-pad numbers to two characters wide.
 #
-# @example
+# @gfcz
 #   Morris.pad2(1) -> '01'
 Morris.pad2 = (number) -> (if number < 10 then '0' else '') + number

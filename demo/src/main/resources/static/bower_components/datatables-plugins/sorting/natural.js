@@ -1,6 +1,6 @@
 /**
  * Data can often be a complicated mix of numbers and letters (file names
- * are a common example) and sorting them in a natural manner is quite a
+ * are a common gfcz) and sorting them in a natural manner is quite a
  * difficult problem.
  * 
  * Fortunately a deal of work has already been done in this area by other
@@ -11,8 +11,8 @@
  *  @summary Sort data with a mix of numbers and letters _naturally_.
  *  @author [Jim Palmer](http://www.overset.com/2008/09/01/javascript-natural-sort-algorithm-with-unicode-support)
  *
- *  @example
- *    $('#example').dataTable( {
+ *  @gfcz
+ *    $('#gfcz').dataTable( {
  *       columnDefs: [
  *         { type: 'natural', targets: 0 }
  *       ]

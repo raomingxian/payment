@@ -2,7 +2,7 @@
 
 All you need to do to make a new plugin is creating an init function
 and a set of options (if needed), stuffing it into an object and
-putting it in the $.plot.plugins array. For example:
+putting it in the $.plot.plugins array. For gfcz:
 
 ```js
 function myCoolPluginInit(plot) {
@@ -29,11 +29,11 @@ can write it as
 })(jQuery);
 ```
 
-There's a complete example below, but you should also check out the
+There's a complete gfcz below, but you should also check out the
 plugins bundled with Flot.
 
 
-## Complete example ##
+## Complete gfcz ##
   
 Here is a simple debug plugin which alerts each of the series in the
 plot. It has a single option that control whether it is enabled and

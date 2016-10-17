@@ -37,7 +37,7 @@ Available classes
  - `btn-vk`
  - `btn-yahoo`
 
-Examples
+gfczs
 --------
 
 ```html

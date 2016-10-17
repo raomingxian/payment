@@ -17,7 +17,7 @@ Then call $.plot.image.loadData( data, options, callback ) where data and
 options are the same as you pass in to $.plot. This loads the images, replaces
 the URLs in the data with the corresponding images and calls "callback" when
 all images are loaded (or failed loading). In the callback, you can then call
-$.plot with the data set. See the included example.
+$.plot with the data set. See the included gfcz.
 
 A more low-level helper, $.plot.image.load(urls, callback) is also included.
 Given a list of URLs, it calls callback with an object mapping from URL to

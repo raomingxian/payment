@@ -9,9 +9,9 @@
  *  @summary Shows an input element into which the user can type a page number
  *  @author [Allan Jardine](http://sprymedia.co.uk)
  *
- *  @example
+ *  @gfcz
  *    $(document).ready(function() {
- *        $('#example').dataTable( {
+ *        $('#gfcz').dataTable( {
  *            "sPaginationType": "input"
  *        } );
  *    } );

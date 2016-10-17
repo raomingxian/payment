@@ -252,7 +252,7 @@
                         <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                         </li>
                         <li class="divider"></li>
-                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li><a href="/logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
@@ -276,24 +276,47 @@
                             <!-- /input-group -->
                         </li>
                        
-                           <c:forEach items="${menus}" var="m">
-       <li>  <a href="${m.url}" target="content"><i class="fa fa-dashboard fa-fw"></i> ${m.name}</a><br/>
-    </c:forEach>
+                           
+<shiro:hasPermission name="business:*">
                         <li>
-                            <a href="/logout"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Charts<span class="fa arrow"></span></a>
+                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> 业务管理<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
+                              <shiro:hasPermission name="organization:*">
                                 <li>
-                                    <a href="flot.html">Flot Charts</a>
+                                    <a href="/organization">组织机构管理</a>
                                 </li>
+                                </shiro:hasPermission>
+                               
+                        </li>
+                        </shiro:hasPermission>
+                        <shiro:hasPermission name="sysmanage:*">
+                        <li>
+                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> 系统管理<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                              <shiro:hasPermission name="organization:*">
                                 <li>
-                                    <a href="morris.html">Morris.js Charts</a>
+                                    <a href="/organization">组织机构管理</a>
                                 </li>
+                                </shiro:hasPermission>
+                                <shiro:hasPermission name="user:*">
+                                <li>
+                                    <a href="/user">用户管理</a>
+                                </li>
+                                </shiro:hasPermission>
+                                <shiro:hasPermission name="resource:*">
+                                <li>
+                                    <a href="/resource">资源管理</a>
+                                </li>
+                                </shiro:hasPermission>
+                                <shiro:hasPermission name="role:*">
+                                <li>
+                                    <a href="/role">角色管理</a>
+                                </li>
+                                </shiro:hasPermission>
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
+                        </shiro:hasPermission>
                         <li>
                             <a href="tables.html"><i class="fa fa-table fa-fw"></i> Tables</a>
                         </li>
@@ -384,8 +407,14 @@
                 </div>
                 <div class="row">
                     <div class="col-lg-12">
-                       <iframe name="content" class="ui-layout-center"
-        src="/welcome" frameborder="0" scrolling="auto" width="100%" higth="100%"></iframe>
+                       
+                       
+                       
+                       
+                       
+                       
+                       
+                       
                     </div>
                     <!-- /.col-lg-12 -->
                 </div>

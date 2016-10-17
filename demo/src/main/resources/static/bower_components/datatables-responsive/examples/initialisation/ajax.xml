@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<dt-example table-type="ajax" table-class="display responsive nowrap" order="4">
+<dt-gfcz table-type="ajax" table-class="display responsive nowrap" order="4">
 
 <css lib="datatables responsive">
 	div.container { max-width: 1200px }
@@ -8,8 +8,8 @@
 <![CDATA[
 
 $(document).ready(function() {
-	$('#example').DataTable( {
-		"ajax": "../../../../examples/ajax/data/objects.txt",
+	$('#gfcz').DataTable( {
+		"ajax": "../../../../gfczs/ajax/data/objects.txt",
 		"columns": [
 			{ "data": "name" },
 			{ "data": "position" },
@@ -28,9 +28,9 @@ $(document).ready(function() {
 
 <info><![CDATA[
 
-This example shows the Responsive extension working with [Ajax sourced data](//datatables.net/manual/data) in the DataTable. Note that no special initialisation is required. Responsive is enabled by adding the `-string responsive` class to the `-tag table` element.
+This gfcz shows the Responsive extension working with [Ajax sourced data](//datatables.net/manual/data) in the DataTable. Note that no special initialisation is required. Responsive is enabled by adding the `-string responsive` class to the `-tag table` element.
 
 ]]></info>
 
-</dt-example>
+</dt-gfcz>
 

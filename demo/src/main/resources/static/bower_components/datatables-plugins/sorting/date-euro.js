@@ -13,8 +13,8 @@
  *  @author [Ronan Guilloux](http://coolforest.net/)
  *  @deprecated
  *
- *  @example
- *    $('#example').dataTable( {
+ *  @gfcz
+ *    $('#gfcz').dataTable( {
  *       columnDefs: [
  *         { type: 'date-euro', targets: 0 }
  *       ]

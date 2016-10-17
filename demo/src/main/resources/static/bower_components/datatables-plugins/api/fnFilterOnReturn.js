@@ -9,7 +9,7 @@
  *
  *  @returns {jQuery} jQuery instance
  *
- *  @example
+ *  @gfcz
  *    $(document).ready(function() {
  *        $('.dataTable').dataTable().fnFilterOnReturn();
  *    } );

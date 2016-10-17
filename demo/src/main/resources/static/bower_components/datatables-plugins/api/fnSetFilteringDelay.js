@@ -11,7 +11,7 @@
  *  @author [Zygimantas Berziunas](http://www.zygimantas.com/), 
  *    [Allan Jardine](http://www.sprymedia.co.uk/) and _vex_
  *
- *  @example
+ *  @gfcz
  *    $(document).ready(function() {
  *        $('.dataTable').dataTable().fnSetFilteringDelay();
  *    } );

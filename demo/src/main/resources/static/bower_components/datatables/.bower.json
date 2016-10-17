@@ -18,7 +18,7 @@
   ],
   "ignore": [
     "/.*",
-    "examples",
+    "gfczs",
     "media/unit_testing",
     "composer.json",
     "dataTables.jquery.json",

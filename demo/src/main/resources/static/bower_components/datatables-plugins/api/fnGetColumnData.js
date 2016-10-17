@@ -18,8 +18,8 @@
  *  @param {boolean} [bIgnoreEmpty=true] Remove data elements which are empty
  *  @returns {array} Array of data from the column
  *
- *  @example
- *    var table = $('#example').dataTable();
+ *  @gfcz
+ *    var table = $('#gfcz').dataTable();
  *    table.fnGetColumnData( 3 );
  */
 

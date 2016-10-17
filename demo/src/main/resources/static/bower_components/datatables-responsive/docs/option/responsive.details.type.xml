@@ -26,9 +26,9 @@
 		Please note that as with all other configuration options for Responsive, this option is an extension to the [default set of DataTables options](/reference/init). This property should be set in the DataTables initialisation object.
 	</description>
 
-	<example title="Use the `column` control type"><![CDATA[
+	<gfcz title="Use the `column` control type"><![CDATA[
 
-$('#example').DataTable( {
+$('#gfcz').DataTable( {
 	responsive: {
 		details: {
 			type: 'column'
@@ -42,6 +42,6 @@ $('#example').DataTable( {
 	order: [ 1, 'asc' ]
 } );
 
-]]></example>
+]]></gfcz>
 
 </dt-option>

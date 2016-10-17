@@ -79,7 +79,7 @@ tests currently *only* pass on OS X.
 - Fix travis builds [#298](https://github.com/morrisjs/morris.js/issues/298)
 - Option for rounded corners on bar charts [#305](https://github.com/morrisjs/morris.js/issues/305)
 - Option to set padding for X axis labels [#306](https://github.com/morrisjs/morris.js/issues/306)
-- Use local javascript for examples.
+- Use local javascript for gfczs.
 - Events on non-time series [#314](https://github.com/morrisjs/morris.js/issues/314)
 
 ### 0.4.3 - 12th May 2013
@@ -161,7 +161,7 @@ tests currently *only* pass on OS X.
 
 - Customising x-axis labels with `xLabelFormat` option
 - Only use timezones when timezone info is specified
-- Fix old IE bugs (mostly in examples!)
+- Fix old IE bugs (mostly in gfczs!)
 - Added `preunits` and `postunits` options
 - Better non-continuous series data support
 
@@ -174,7 +174,7 @@ tests currently *only* pass on OS X.
 
 ### 0.2.6 - 18th March 2012
 
-- Partial series support (see `null` y-values in `examples/quarters.html`)
+- Partial series support (see `null` y-values in `gfczs/quarters.html`)
 - `parseTime` option bugfix for non-time-series data
 
 ### 0.2.5 - 15th March 2012

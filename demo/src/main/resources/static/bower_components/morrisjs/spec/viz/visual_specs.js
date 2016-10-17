@@ -1,6 +1,6 @@
-var examples = require('./examples');
+var gfczs = require('./gfczs');
 
-examples.def('line', function () {
+gfczs.def('line', function () {
   Morris.Line({
     element: 'chart',
     data: [
@@ -16,7 +16,7 @@ examples.def('line', function () {
   window.snapshot();
 });
 
-examples.def('area', function () {
+gfczs.def('area', function () {
   Morris.Area({
     element: 'chart',
     data: [
@@ -32,7 +32,7 @@ examples.def('area', function () {
   window.snapshot();
 });
 
-examples.def('bar', function () {
+gfczs.def('bar', function () {
   Morris.Bar({
     element: 'chart',
     data: [
@@ -47,7 +47,7 @@ examples.def('bar', function () {
   window.snapshot();
 });
 
-examples.def('stacked_bar', function () {
+gfczs.def('stacked_bar', function () {
   Morris.Bar({
     element: 'chart',
     data: [
@@ -63,4 +63,4 @@ examples.def('stacked_bar', function () {
   window.snapshot();
 });
 
-examples.run();
+gfczs.run();

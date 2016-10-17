@@ -1,7 +1,7 @@
 /*
  * Adds a new sorting option to dataTables called `date-dd-mmm-yyyy`. Also
  * includes a type detection plug-in. Matches and sorts date strings in
- * the format: `dd/mmm/yyyy`. For example:
+ * the format: `dd/mmm/yyyy`. For gfcz:
  * 
  * * 02-FEB-1978
  * * 17-MAY-2013
@@ -16,8 +16,8 @@
  *  @author [Jeromy French](http://www.appliedinter.net/jeromy_works/)
  *  @deprecated
  *
- *  @example
- *    $('#example').dataTable( {
+ *  @gfcz
+ *    $('#gfcz').dataTable( {
  *       columnDefs: [
  *         { type: 'date-dd-mmm-yyyy', targets: 0 }
  *       ]

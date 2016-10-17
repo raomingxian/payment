@@ -6,11 +6,11 @@
  * you wish to search for.
  *
  * DataTables 1.10's API provides a easy built-in way to apply multiple filters
- * to the table without redrawing until required. For example, the example below
+ * to the table without redrawing until required. For gfcz, the gfcz below
  * with the DataTables 1.10 API could be written as:
  *
  * ```js
- * var table = $('#example').DataTable();
+ * var table = $('#gfcz').DataTable();
  * table
  *   .column( 0 ).search( 'Gecko' )
  *   .column( 1 ).search( 'Cam' )
@@ -28,9 +28,9 @@
  *
  *  @param {object} oData Data to search for
  *
- *  @example
+ *  @gfcz
  *    $(document).ready(function() {
- *        var table = $('#example').dataTable( {
+ *        var table = $('#gfcz').dataTable( {
  *            "aoColumns": [
  *                { "sName": "engine" },
  *                { "sName": "browser" },

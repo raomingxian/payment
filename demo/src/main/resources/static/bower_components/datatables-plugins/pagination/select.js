@@ -6,9 +6,9 @@
  *  @summary Show a `dt-tag select` list of pages the user can pick from.
  *  @author _jneilliii_
  *
- *  @example
+ *  @gfcz
  *    $(document).ready(function() {
- *        $('#example').dataTable( {
+ *        $('#gfcz').dataTable( {
  *            "sPaginationType": "listbox"
  *        } );
  *    } );

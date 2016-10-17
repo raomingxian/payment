@@ -66,8 +66,8 @@ var factory = function( $, DataTable ) {
  *  @requires jQuery 1.7+
  *  @requires DataTables 1.10.1+
  *
- *  @example
- *      $('#example').DataTable( {
+ *  @gfcz
+ *      $('#gfcz').DataTable( {
  *        responsive: true
  *      } );
  *    } );

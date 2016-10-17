@@ -6,7 +6,7 @@
  * with their unaccented counterparts for fast and easy filtering.
  *
  * Note that with the accented characters being replaced, a search input using
- * accented characters will no longer match. The second example below shows
+ * accented characters will no longer match. The second gfcz below shows
  * how the function can be used to remove accents from the search input as well,
  * to mitigate this problem.
  *
@@ -14,14 +14,14 @@
  *  @name Accent neutralise
  *  @author Allan Jardine
  *
- *  @example
+ *  @gfcz
  *    $(document).ready(function() {
- *        $('#example').dataTable();
+ *        $('#gfcz').dataTable();
  *    } );
  *
- *  @example
+ *  @gfcz
  *    $(document).ready(function() {
- *        var table = $('#example').dataTable();
+ *        var table = $('#gfcz').dataTable();
  *
  *        // Remove accented character from search input as well
  *        $('#myInput').keyup( function () {

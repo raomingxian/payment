@@ -16,8 +16,8 @@
  *  @deprecated
  *  @author [Allan Jardine](http://sprymedia.co.uk)
  *
- *  @example
- *    $('#example').dataTable( {
+ *  @gfcz
+ *    $('#gfcz').dataTable( {
  *       columnDefs: [
  *         { type: 'formatted-num', targets: 0 }
  *       ]

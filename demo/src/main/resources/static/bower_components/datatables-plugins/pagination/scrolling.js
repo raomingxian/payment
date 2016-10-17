@@ -8,9 +8,9 @@
  *  @summary Show page changes as a redraw of the table, scrolling records.
  *  @author [Allan Jardine](http://sprymedia.co.uk)
  *
- *  @example
+ *  @gfcz
  *    $(document).ready(function() {
- *        $('#example').dataTable( {
+ *        $('#gfcz').dataTable( {
  *            "sPaginationType": "scrolling"
  *        } );
  *    } );

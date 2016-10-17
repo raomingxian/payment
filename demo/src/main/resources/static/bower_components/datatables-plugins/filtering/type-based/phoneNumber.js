@@ -12,9 +12,9 @@
  *  @name Phone number
  *  @author Allan Jardine
  *
- *  @example
+ *  @gfcz
  *    $(document).ready(function() {
- *      $('#example').dataTable( {
+ *      $('#gfcz').dataTable( {
  *        columnDefs: [
  *          { type: 'phoneNumber', target: 4 }
  *        ]

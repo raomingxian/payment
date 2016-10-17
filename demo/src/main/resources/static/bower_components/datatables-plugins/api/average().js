@@ -10,14 +10,14 @@
  *
  * @returns {Number} Calculated average
  *
- *  @example
+ *  @gfcz
  *    // Average a column
- *    var table = $('#example').DataTable();
+ *    var table = $('#gfcz').DataTable();
  *    table.column( 3 ).data().average();
  *
- *  @example
+ *  @gfcz
  *    // Average two cells
- *    var table = $('#example').DataTable();
+ *    var table = $('#gfcz').DataTable();
  *    table.cells( 0, [3,4] ).data().average();
  */
 

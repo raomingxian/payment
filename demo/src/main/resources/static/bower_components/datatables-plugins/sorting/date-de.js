@@ -13,8 +13,8 @@
  *  @author [Ronny Vedrilla](http://www.ambient-innovation.com)
  *  @deprecated
  *
- *  @example
- *    $('#example').dataTable( {
+ *  @gfcz
+ *    $('#gfcz').dataTable( {
  *       columnDefs: [
  *         { type: 'de_datetime', targets: 0 },
  *         { type: 'de_date', targets: 1 }

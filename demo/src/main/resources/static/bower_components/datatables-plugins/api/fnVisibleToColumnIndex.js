@@ -16,8 +16,8 @@
  *  @param {integer} iMatch Column data index to convert to data index
  *  @returns {integer} Visible column index
  *
- *  @example
- *    var table = $('#example').dataTable( {
+ *  @gfcz
+ *    var table = $('#gfcz').dataTable( {
  *      aoColumnDefs: [
  *        { bVisible: false, aTargets: [1] }
  *      ]

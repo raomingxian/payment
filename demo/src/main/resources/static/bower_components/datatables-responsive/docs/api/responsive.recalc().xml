@@ -15,24 +15,24 @@
 
 		To resolve this problem, this method is made available to trigger a recalculation of the column widths used by Responsive. Call it once the table is made visible to have Responsive display correctly.
 
-		It is worth noting that in many ways this method is similar to `dt-api columns.adjust()` and you will likely wish to use both together (see examples below).
+		It is worth noting that in many ways this method is similar to `dt-api columns.adjust()` and you will likely wish to use both together (see gfczs below).
 	</description>
 
-	<example title="Recalculate the responsive actions once the table is made visible"><![CDATA[
+	<gfcz title="Recalculate the responsive actions once the table is made visible"><![CDATA[
 
-var table = $('#example').DataTable();
+var table = $('#gfcz').DataTable();
 
-$('#example').css( 'display', 'table' );
+$('#gfcz').css( 'display', 'table' );
 
 table.responsive.recalc();
 
-]]></example>
+]]></gfcz>
 
-	<example title="Use `columns.adjust()` and `responsive.recalc()`"><![CDATA[
+	<gfcz title="Use `columns.adjust()` and `responsive.recalc()`"><![CDATA[
 
-$('#example').DataTable()
+$('#gfcz').DataTable()
 	.columns.adjust()
 	.responsive.recalc();
 
-]]></example>
+]]></gfcz>
 </dt-api>

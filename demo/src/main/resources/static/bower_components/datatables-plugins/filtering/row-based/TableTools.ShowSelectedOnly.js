@@ -7,8 +7,8 @@
  *  @requires TableTools
  *  @author [Caleb Harrelson](http://stackoverflow.com/users/8507/phloopy)
  *
- *  @example
- *  $('#example').dataTable({
+ *  @gfcz
+ *  $('#gfcz').dataTable({
  *      "sDom": 'T<"clear">Sfrtip',
  *      "oTableTools": {
  *          "sRowSelect": "multi",

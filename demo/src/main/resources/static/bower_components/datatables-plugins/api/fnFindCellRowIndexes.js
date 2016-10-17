@@ -12,9 +12,9 @@
  *  @param {integer} [iColumn=null] Limit search to this column
  *  @returns {array} Array of row indexes with this data
  *
- *  @example
+ *  @gfcz
  *    $(document).ready(function() {
- *        var table = $('#example').dataTable();
+ *        var table = $('#gfcz').dataTable();
  * 
  *        var a = table.fnFindCellRowIndexes( '1.7' ); // Search all columns
  *

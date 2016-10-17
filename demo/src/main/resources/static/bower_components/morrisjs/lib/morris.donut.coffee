@@ -1,6 +1,6 @@
 # Donut charts.
 #
-# @example
+# @gfcz
 #   Morris.Donut({
 #     el: $('#donut-container'),
 #     data: [

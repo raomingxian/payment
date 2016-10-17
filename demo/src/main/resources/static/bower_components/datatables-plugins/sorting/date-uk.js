@@ -15,8 +15,8 @@
  *  @author Andy McMaster
  *  @deprecated
  *
- *  @example
- *    $('#example').dataTable( {
+ *  @gfcz
+ *    $('#gfcz').dataTable( {
  *       columnDefs: [
  *         { type: 'date-uk', targets: 0 }
  *       ]

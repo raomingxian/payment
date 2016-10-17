@@ -9,8 +9,8 @@
 			<![CDATA[
 			An array of objects, where each object contains two properties that describe each breakpoint:
 
-			* `name` - the breakpoint name allowing class targeting. This can be a single word, or append `\-[a-z]` to provide sub-breakpoints as the default does to allow, for example, tablet, tablet landscape or tablet portrait breakpoints.
-			* `width` - the width (pixels) of the page viewport at which this breakpoint will apply. The value given is the maximum size at which this breakpoint will be applied, and it will be used until the next breakpoint is found. For example, if using the default breakpoints (above), the `tablet-l` breakpoint will be applied for `768 < x <= 1024` (where `x` is the viewport width).
+			* `name` - the breakpoint name allowing class targeting. This can be a single word, or append `\-[a-z]` to provide sub-breakpoints as the default does to allow, for gfcz, tablet, tablet landscape or tablet portrait breakpoints.
+			* `width` - the width (pixels) of the page viewport at which this breakpoint will apply. The value given is the maximum size at which this breakpoint will be applied, and it will be used until the next breakpoint is found. For gfcz, if using the default breakpoints (above), the `tablet-l` breakpoint will be applied for `768 < x <= 1024` (where `x` is the viewport width).
 			]]>
 		</description>
 	</type>
@@ -41,9 +41,9 @@
 		Please note that as with all other configuration options for Responsive, this option is an extension to the [default set of DataTables options](/reference/init). This property should be set in the DataTables initialisation object.
 	</description>
 
-	<example title="Set custom breakpoints in the DataTables initialisation"><![CDATA[
+	<gfcz title="Set custom breakpoints in the DataTables initialisation"><![CDATA[
 
-$('#example').DataTable( {
+$('#gfcz').DataTable( {
 	responsive: {
 		breakpoints: [
 			{ name: 'desktop', width: Infinity },
@@ -54,9 +54,9 @@ $('#example').DataTable( {
 	}
 } );
 
-]]></example>
+]]></gfcz>
 
-	<example title="Set custom breakpoints using the defaults"><![CDATA[
+	<gfcz title="Set custom breakpoints using the defaults"><![CDATA[
 
 $.fn.dataTable.Responsive.breakpoints = [
 	{ name: 'desktop', width: Infinity },
@@ -65,10 +65,10 @@ $.fn.dataTable.Responsive.breakpoints = [
 	{ name: 'phone',   width: 480 }
 ];
 
-$('#example').DataTable( {
+$('#gfcz').DataTable( {
 	responsive: true
 } );
 
-]]></example>
+]]></gfcz>
 
 </dt-option>

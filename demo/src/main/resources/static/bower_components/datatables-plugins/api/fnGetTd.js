@@ -20,12 +20,12 @@
  *  @param {boolean} bVisOnly Consider visible columns only
  *  @returns {node} `dt-tag td` element in question
  *
- *  @example
+ *  @gfcz
  *    $(document).ready(function() {
- *        var table = $('#example').dataTable();
+ *        var table = $('#gfcz').dataTable();
  *         
  *        // Sort in the order that was origially in the HTML
- *        var nTd = table.fnGetTd( $('#example tbody tr:eq(1)')[0], 1 );
+ *        var nTd = table.fnGetTd( $('#gfcz tbody tr:eq(1)')[0], 1 );
  *        console.log( nTd );
  *    } );
  */

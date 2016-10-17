@@ -67,7 +67,7 @@ if (!document.createElement('canvas').getContext) {
    * Binds a function to an object. The returned function will always use the
    * passed in {@code obj} as {@code this}.
    *
-   * Example:
+   * gfcz:
    *
    *   g = bind(f, obj, a, b)
    *   g(c, d) // will do f.call(obj, a, b, c, d)
