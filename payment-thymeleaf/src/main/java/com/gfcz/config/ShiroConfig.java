@@ -10,10 +10,12 @@ import org.apache.shiro.cache.CacheManager;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.session.mgt.eis.JavaUuidSessionIdGenerator;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
+import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.filter.authc.FormAuthenticationFilter;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
+import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.boot.context.embedded.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -63,6 +65,7 @@ public class ShiroConfig {
 		bean.setSecurityManager(securityManager());
 		bean.setLoginUrl("/login");
 		bean.setSuccessUrl("/index");
+		bean.setUnauthorizedUrl("");
 		Map<String, Filter> filters = Maps.newHashMap();
 		filters.put("perms", urlPermissionsFilter());
 //		filters.put("anon", new AnonymousFilter());
@@ -79,8 +82,8 @@ public class ShiroConfig {
 		chains.put("/js/**", "anon");    //静态资源
 		chains.put("/jquery-treetable/**", "anon");    //静态资源
 		chains.put("/js/**", "anon");    //静态资源
-		chains.put("/**", "authc,perms");   //auths认证  perms权限 
-//		chains.put("/**", "authc"); 
+//		chains.put("/**", "authc,perms");   //auths认证  perms权限 
+		chains.put("/**", "authc"); 
 //		chains.put("/**", "anon");//anon 可以理解为不拦截
 		bean.setFilterChainDefinitionMap(chains);
 		return bean;
@@ -180,6 +183,22 @@ public class ShiroConfig {
 		return formAuthenticationFilter;
 		
 	}
+	
+	@Bean 
+	@DependsOn(value="lifecycleBeanPostProcessor")
+	public DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxy(){
+		DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator=new DefaultAdvisorAutoProxyCreator();
+		defaultAdvisorAutoProxyCreator.setProxyTargetClass(true);
+		return defaultAdvisorAutoProxyCreator;
+	}
+	
+	@Bean
+	public AuthorizationAttributeSourceAdvisor authorizationAttributeS(){
+		AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor=new AuthorizationAttributeSourceAdvisor();
+		authorizationAttributeSourceAdvisor.setSecurityManager(securityManager());
+		return authorizationAttributeSourceAdvisor;
+	}
+
 	
 	 /**  
 	   * ShiroDialect，为了在thymeleaf里使用shiro的标签的bean  
