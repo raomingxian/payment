@@ -1,0 +1,412 @@
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/js/diy/buttonDIY.css" />
+<link href="<%=request.getContextPath()%>/js/contextmenu/jquery.contextMenu.css" rel="stylesheet" type="text/css" />
+<script src="<%=request.getContextPath()%>/js/contextmenu/jquery.contextMenu.js" type="text/javascript"></script>
+<script src="<%=request.getContextPath()%>/js/contextmenu/jquery.ui.position.min.js" type="text/javascript"></script>
+
+
+		<!--[if !IE]> -->
+
+		
+			<script src='/assets/js/jquery-2.0.3.min.js'/>
+		
+		<!-- <![endif]-->
+
+		<!--[if IE]>
+			<script src='/assets/js/jquery-1.10.2.min.js'/>
+
+		<![endif]-->
+<script type="text/javascript">
+    function addfunc(){//新增用户函数
+        var layerWidth=$(window).width()*0.8 > 600?600:$(window).width()*0.8;
+        var layerHeigth=$(window).height()*0.8 > 550?550:$(window).height()*0.8;
+        layer.open({
+            type: 2,
+            content: '<%=request.getContextPath()%>/login/user/orgUserAdd.do',
+            area: [layerWidth+'px', layerHeigth+'px'],
+            title:'新增用户',
+            btn:["提  交","取 消"],
+            yes:function(index, layero){
+                var iframeWin = window[layero.find('iframe')[0]['name']];
+                if(iframeWin.validatebox()){
+                    layer.confirm('确定要保存新增用户吗?', {icon: 3, title:'提示'}, function(index){
+                        iframeWin.submitUserInfo();
+                    });
+                }
+            },
+            closeBtn: 2
+        });
+    }
+    function editfunc(){//编辑用户函数
+        var idsArray = $("#grid-table").jqGrid('getGridParam','selarrrow');
+        if(idsArray.length != 1){
+            message("请选择一条数据",5);
+            return;
+        }
+        var id = idsArray[0];
+        var layerWidth=$(window).width()*0.8 > 600?600:$(window).width()*0.8;
+        var layerHeigth=$(window).height()*0.8 > 550?550:$(window).height()*0.8;
+        layer.open({
+            type: 2,
+            content: '<%=request.getContextPath()%>/login/user/getOrgUserInfoById.do?id='+id,
+            area: [layerWidth+'px', layerHeigth+'px'],
+            title:'修改用户',
+            btn:["提  交","取 消"],
+            yes:function(index, layero){
+                layer.confirm('确定要保存修改好用户吗?', {icon: 3, title:'提示'}, function(index){
+                    var iframeWin = window[layero.find('iframe')[0]['name']];
+                    if(iframeWin.validatebox()){
+                        iframeWin.submitUserInfo();
+                    }
+                });
+            },
+            closeBtn: 2
+        });
+    }
+
+    function delfunc(){//删除函数
+        var idsArray = $("#grid-table").jqGrid('getGridParam','selarrrow');
+        if(idsArray.length == 0){
+            message("请至少选择一条数据",5);
+            return;
+        }
+        var _param = "&idsArray=" + idsArray;
+        layer.confirm('确定要删除这' + idsArray.length + '个用户吗?', {icon: 3, title:'提示'}, function(index){
+            $.post('<%=request.getContextPath()%>/login/user/deleteOrgUser.do', _param, function(data){
+                if(data == 1){
+                    message("删除成功",6);
+                    reloadGrid();
+                }else{
+                    message("删除失败",5);
+                }
+            });
+        });
+    }
+    function search(){//搜索函数
+        var postData = $("#grid-table").jqGrid("getGridParam", "postData");
+        delete postData["loginName"];
+        delete postData["userName"];
+        delete postData["phone"];
+        delete postData["email"];
+        var _param = setSearchParameter();//设置搜索参数
+        $.extend(postData, _param);
+        $("#grid-table").jqGrid("setGridParam", {
+            search:true
+        }).trigger("reloadGrid");
+    }
+
+    function setSearchParameter(){
+        var key = $("#searchSelectId").val();
+        var value =  $("#searchInputId").val();
+        var _param = {};
+        _param[key] = value;
+        return _param;
+    }
+
+    function enterPress(e){ //监听键盘输入值
+        var e = e || window.event; 
+        if(e.keyCode == 13){
+            search();
+        } 
+    }
+
+    function relateRole(){//用户关联角色
+        var idsArray = $("#grid-table").jqGrid('getGridParam','selarrrow');
+        if(idsArray.length != 1){
+            message("请选择一条记录",5);
+            return;
+        }
+        var id = idsArray[0];
+        var layerWidth=$(window).width()*0.8 > 1000?1000:$(window).width()*0.8;
+        var layerHeigth=$(window).height()*0.8 > 780?780:$(window).height()*0.8;
+        layer.open({
+            type: 2,
+            content: '<%=request.getContextPath()%>/login/user/relateRolePage.do?id='+id,
+            area: [layerWidth+'px', layerHeigth+'px'],
+            title:'角色授权',
+            closeBtn: 2
+        });
+    }
+
+    function relateUnit(){//用户关联部门
+        var idsArray = $("#grid-table").jqGrid('getGridParam','selarrrow');
+        if(idsArray.length != 1){
+            message("请选择一条记录",5);
+            return;
+        }
+        var id = idsArray[0];
+
+        var layerWidth=$(window).width()*0.8 > 425?425:$(window).width()*0.8;
+        var layerHeigth=$(window).height()*0.8 > 700?700:$(window).height()*0.8;
+        layer.open({
+            type: 2,
+            content: '<%=request.getContextPath()%>/login/user/relateUnitPage.do?id='+id,
+            area: [layerWidth+'px', layerHeigth+'px'],
+            title:'用户关联部门',
+            btn:["提  交","取 消"],
+            yes:function(index, layero){
+                var iframeWin = window[layero.find('iframe')[0]['name']];
+                iframeWin.submitRelateUnitInfo();
+            },
+            closeBtn: 2
+        });
+    }
+
+    function reloadGrid(){//刷新表格
+        $("#grid-table").trigger("reloadGrid");
+    }
+
+    function message(msg,icon){//提示框
+        layer.msg(msg, {icon: icon});
+    }
+</script>
+<script type="text/javascript">
+$(function($) {
+    var winHeight = $(window).height()-$("#toolbar").height()-240;//表格高度适应各分辨率
+    var winWidth = $("#page_content").width();
+    $("#grid-table").jqGrid({
+        url : '<%=request.getContextPath()%>/login/user/getOrgUserListData.do',
+        datatype : "json",
+        mtype : "post",
+        colNames:['登录名', '姓名', '性别', '手机号码', '电子邮箱', '通信地址'],
+        colModel:[
+            {name:'loginName', index:'loginName', width:60, sortable:true},
+            {name:'userName', index:'userName', width:60, sortable:true},
+            {name:'sex', index:'sex', width:60, sortable:true, formatter: function(cellvalue, options, row){
+                var val = "";
+                if(cellvalue == 0){
+                    val = "男";
+                }
+                if(cellvalue == 1){
+                    val = "女";
+                }
+                return val;
+            }},
+            {name:'phone', index:'phone', width:60},
+            {name:'email', index:'email', width:60},
+            {name:'address', index:'address', width:60}
+        ],
+        postData:{},
+        toolbar:[true,'top'],
+        viewrecords : true,
+        search: true,
+        rowNum:20,
+        rowList:[10,20,30],
+        pager : '#grid-pager',
+        pgtext: '第{0}页   共 {1} 页', 
+        recordtext: '显示 {0} 到 {1} 条记录,共 {2} 条记录',
+        altRows: true,
+        multiselect: true,
+        multiselectWidth:50,
+        multiboxonly: true,
+        loadComplete : function() {
+            var table = this;
+            setTimeout(function(){
+                updatePagerIcons(table);
+                updateActionIcons(table);
+                contextMenu();//右键菜单
+            }, 0);
+        },
+        gridComplete: function(){
+             //根据浏览器动态改变宽度
+             $(window).resize(function(){ 
+                 var winwidth=$("#page_content").width();
+                 var winheight = $(window).height()-$("#toolbar").height()-240;
+                 $("#grid-table").setGridWidth(winwidth);
+                 $("#grid-table").setGridHeight(winheight);
+                 //消除由于兼容性问题出现的横向滚动条
+                 var w2 = parseInt($('.ui-jqgrid-labels>th:eq(2)').css('width'))-3;
+                 $('.ui-jqgrid-lables>th:eq(2)').css('width',w2);
+                 $('#grid-table tr').find("td:eq(2)").each(function(){
+                    $(this).css('width',w2);
+                 });
+             });
+             //消除由于兼容性问题出现的横向滚动条
+             var w2 = parseInt($('.ui-jqgrid-labels>th:eq(2)').css('width'))-3;
+             $('.ui-jqgrid-lables>th:eq(2)').css('width',w2);
+             $('#grid-table tr').find("td:eq(2)").each(function(){
+                $(this).css('width',w2);
+             });
+        },
+        ondblClickRow:function(rowid,iRow,iCol,e){//行双击事件
+            editfunc(rowid);
+        },
+        height:winHeight,
+        width: winWidth,
+        shrinkToFit: true
+    });
+
+    function updatePagerIcons(table) {
+        var replacement = 
+        {
+            'ui-icon-seek-first' : 'icon-double-angle-left bigger-140',
+            'ui-icon-seek-prev' : 'icon-angle-left bigger-140',
+            'ui-icon-seek-next' : 'icon-angle-right bigger-140',
+            'ui-icon-seek-end' : 'icon-double-angle-right bigger-140'
+        };
+        $('.ui-pg-table:not(.navtable) > tbody > tr > .ui-pg-button > .ui-icon').each(function(){
+            var icon = $(this);
+            var $class = $.trim(icon.attr('class').replace('ui-icon', ''));
+
+            if($class in replacement) icon.attr('class', 'ui-icon '+replacement[$class]);
+        });
+    }
+    function updateActionIcons(table) {
+        var replacement = 
+        {
+            'ui-icon-pencil' : 'icon-pencil blue',
+            'ui-icon-trash' : 'icon-trash red',
+            'ui-icon-disk' : 'icon-ok green',
+            'ui-icon-cancel' : 'icon-remove red'
+        };
+        $(table).find('.ui-pg-div span.ui-icon').each(function(){
+            var icon = $(this);
+            var $class = $.trim(icon.attr('class').replace('ui-icon', ''));
+            if($class in replacement) icon.attr('class', 'ui-icon '+replacement[$class]);
+        });
+    }
+    $("#t_grid-table").css({"height":"auto"});
+    $("#toolbar").appendTo("#t_grid-table");
+
+    //右键菜单
+    function contextMenu(){
+        $.contextMenu({
+            selector : '#grid-table tr.jqgrow',
+            trigger : 'right',
+            callback : function(key, options) {
+                var m = "clicked: " + key;
+                window.console && console.log(m) || alert(m);
+            },
+            items : {
+                "edit" : {
+                    name : "编辑",
+                    icon : "edit"
+                },
+                "cut" : {
+                    name : "剪切",
+                    icon : "cut"
+                },
+                "copy" : {
+                    name : "复制",
+                    icon : "copy",
+                    items: {
+                            "movecopy": {
+                                name: "移动复制"
+                            },
+                            "copy": {
+                            name: "复制", 
+                            items: {
+                                "fold2-key1": {"name": "alpha"},
+                                "fold2-key2": {"name": "bravo"},
+                                "fold2-key3": {"name": "charlie"}
+                            }
+                      },
+                      "fold1-key3": {"name": "delta"}
+                  }
+                },
+                "paste" : {
+                    name : "Paste",
+                    icon : "paste"
+                },
+                "delete" : {
+                    name : "Delete",
+                    icon : "delete"
+                },
+                "sep1" : "---------",
+                "quit" : {
+                    name : "Quit",
+                    icon : function($element,key, item) {
+                        return 'context-menu-icon context-menu-icon-quit';
+                    }
+                }
+            }
+        });
+    }
+});
+</script>
+    <table id="grid-table" class="context-menu-one"></table>
+    <div id="grid-pager"></div>
+    <div id="toolbar" style="margin-top: 5px;margin-bottom: 5px;">
+        <table cellspacing="0" cellpadding="0" border="0" class="ui-pg-table" style="width:100%;table-layout:fixed;height:100%;" role="row">
+            <tbody>
+                <tr>
+                    <td id="grid-pager_left" align="left">
+                        <table cellspacing="0" cellpadding="0" border="0" class="ui-pg-table navtable" style="float:left;table-layout:auto;">
+                            <tbody>
+                                <tr>
+                                    <td class="ui-pg-button ui-corner-all" title="添加" id="add_grid-table">
+                                        <div class="ui-pg-div">
+                                            <button class="btn btn-primary button-radius btn-xs" onclick="addfunc()">
+                                                <i class="icon-plus-sign align-top bigger-125"></i>添&nbsp;加
+                                            </button>
+                                        </div>
+                                    </td>
+                                    <td class="ui-pg-button ui-corner-all" title="修改" id="edit_grid-table">
+                                        <div class="ui-pg-div">
+                                            <button class="btn btn-primary button-radius btn-xs" onclick="editfunc()">
+                                                <i class="icon-edit align-top bigger-125"></i>修&nbsp;改
+                                            </button>
+                                        </div>
+                                    </td>
+                                    <td class="ui-pg-button ui-corner-all" title="删除" id="add_grid-table">
+                                        <div class="ui-pg-div">
+                                            <button class="btn btn-primary button-radius btn-xs" onclick="delfunc()">
+                                                <i class="icon-trash align-top bigger-125"></i>删&nbsp;除
+                                            </button>
+                                        </div>
+                                    </td>
+                                    <td class="ui-pg-button ui-corner-all" title="刷新" id="add_grid-table">
+                                        <div class="ui-pg-div">
+                                            <button class="btn btn-primary button-radius btn-xs" onclick="reloadGrid()">
+                                                <i class="icon-refresh align-top bigger-125"></i>刷&nbsp;新
+                                            </button>
+                                        </div>
+                                    </td>
+                                    <td class="ui-pg-button ui-corner-all" title="用户关联角色" id="add_grid-table">
+                                        <div class="ui-pg-div">
+                                            <button class="btn btn-primary button-radius btn-xs" onclick="relateRole()">
+                                                <i class="icon-cogs align-top bigger-125"></i>用户关联角色
+                                            </button>
+                                        </div>
+                                    </td>
+                                    <td class="ui-pg-button ui-corner-all" title="用户关联部门" id="add_grid-table">
+                                        <div class="ui-pg-div">
+                                            <button class="btn btn-primary button-radius btn-xs" onclick="relateUnit()">
+                                                <i class="icon-cogs align-top bigger-125"></i>用户关联部门
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                    <td>
+                        <div class="input-group" style="width: 400px;float: right;margin-right: 15px">
+                          <span class="input-group-addon" style="padding: 0 0 0 0;margin: 0 0 0 0;">
+                            <select style="border: 0px" id="searchSelectId" onkeypress="enterPress(event)">
+                                <option value="loginName">登录名</option>
+                                <option value="userName">姓名</option>
+                                <option value="phone">手机号</option>
+                                <option value="email">电子邮箱</option>
+                            </select>
+                          </span>
+                          <input type="text" class="form-control" id="searchInputId" onkeypress="enterPress(event)"/>
+                          <span class="input-group-btn">
+                            <button type="button" class="btn btn-primary btn-sm button-radius" onkeypress="enterPress(event)" onclick="search()">
+                                <i class="icon-search bigger-110"></i>
+                                查找
+                            </button>
+                          </span>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
