@@ -33,6 +33,8 @@ public class PaymentController {
 
 	@Autowired
 	private IPaymentDao iPaymentDao;
+    @Autowired  
+    private HttpServletRequest request; 
 	
     private static final Logger LOG = Logger.getLogger(PaymentController.class.getName());
    
@@ -43,7 +45,11 @@ public class PaymentController {
      */
     @RequestMapping(value = "/11")
     public Page<BusinessPayment> findPayment(){
-    	PageRequest pageRequest = buildPageRequest(11, 10, "auto");
+    	
+    	request.getParameter("pageNumber");
+    	request.getParameter("pagzSize");
+    	
+    	PageRequest pageRequest = buildPageRequest(11, 10);
     	
     	return iPaymentDao.findAll(pageRequest);
     }
@@ -51,14 +57,11 @@ public class PaymentController {
     /**
      * 创建分页请求.
      */
-    private PageRequest buildPageRequest(int pageNumber, int pagzSize, String sortType) {
+    private PageRequest buildPageRequest(int pageNumber, int pagzSize) {
         Sort sort = null;
-        if ("auto".equals(sortType)) {
-            sort = new Sort(Direction.DESC, "id");
-        } else if ("title".equals(sortType)) {
-            sort = new Sort(Direction.ASC, "moneyUsed");
-        }
-  
+        
+        sort = new Sort(Direction.DESC, "id");
+            
         return new PageRequest(pageNumber - 1, pagzSize, sort);
     }
 
