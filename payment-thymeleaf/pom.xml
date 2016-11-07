@@ -11,11 +11,12 @@
 
 	<parent>
 		<groupId>com.lance</groupId>
-		<artifactId>spring-boot-parent</artifactId>
-		<version>1.1</version>
+		<artifactId>spring-boot-shiro-tyhmeleaf</artifactId>
+		<version>1.2</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
-
+	
+	
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>

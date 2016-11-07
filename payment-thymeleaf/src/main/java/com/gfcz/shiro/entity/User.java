@@ -12,6 +12,7 @@ public class User implements Serializable {
     private Long id; //编号
     private Long organizationId; //所属公司
     private String username; //用户名
+    private String realname; //用户名
     private String password; //密码
     private String salt; //加密密码的盐
     private List<Long> roleIds; //拥有的角色列表
@@ -81,7 +82,15 @@ public class User implements Serializable {
     }
 
 
-    public String getRoleIdsStr() {
+    public String getRealname() {
+		return realname;
+	}
+
+	public void setRealname(String realname) {
+		this.realname = realname;
+	}
+
+	public String getRoleIdsStr() {
         if(CollectionUtils.isEmpty(roleIds)) {
             return "";
         }

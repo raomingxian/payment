@@ -6,6 +6,7 @@ import javax.servlet.DispatcherType;
 import javax.servlet.Filter;
 
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
+import org.apache.shiro.authz.UnauthenticatedException;
 import org.apache.shiro.cache.CacheManager;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.session.mgt.eis.JavaUuidSessionIdGenerator;
@@ -21,6 +22,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.web.filter.DelegatingFilterProxy;
+import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
 
 import com.gfcz.shiro.realm.UserRealm;
 import com.google.common.collect.Maps;
@@ -65,9 +67,8 @@ public class ShiroConfig {
 		bean.setSecurityManager(securityManager());
 		bean.setLoginUrl("/login");
 		bean.setSuccessUrl("/index");
-		bean.setUnauthorizedUrl("");
 		Map<String, Filter> filters = Maps.newHashMap();
-		filters.put("perms", urlPermissionsFilter());
+//		filters.put("perms", urlPermissionsFilter());
 //		filters.put("anon", new AnonymousFilter());
 		bean.setFilters(filters);
 		
@@ -208,6 +209,15 @@ public class ShiroConfig {
 	  public ShiroDialect shiroDialect(){  
 		  return new ShiroDialect();  
 	  }
-
+//	  @Bean
+//	  public SimpleMappingExceptionResolver exceptionResolver(){
+//		  SimpleMappingExceptionResolver simpleMappingExceptionResolver=new SimpleMappingExceptionResolver();
+//		  UnauthenticatedException unauthenticatedException=new UnauthenticatedException();
+//		  unauthenticatedException.
+//		  simpleMappingExceptionResolver.setExceptionMappings("","");
+//		  return simpleMappingExceptionResolver;
+//	  } 
+//	  
+	 
 	
 }

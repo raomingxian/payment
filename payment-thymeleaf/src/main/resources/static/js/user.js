@@ -1,166 +1,3 @@
-var grid_data = [ {
-	id : "1",
-	name : "Desktop Computer",
-	note : "note",
-	stock : "Yes",
-	ship : "FedEx",
-	sdate : "2007-12-03"
-}, {
-	id : "2",
-	name : "Laptop",
-	note : "Long text ",
-	stock : "Yes",
-	ship : "InTime",
-	sdate : "2007-12-03"
-}, {
-	id : "3",
-	name : "LCD Monitor",
-	note : "note3",
-	stock : "Yes",
-	ship : "TNT",
-	sdate : "2007-12-03"
-}, {
-	id : "4",
-	name : "Speakers",
-	note : "note",
-	stock : "No",
-	ship : "ARAMEX",
-	sdate : "2007-12-03"
-}, {
-	id : "5",
-	name : "Laser Printer",
-	note : "note2",
-	stock : "Yes",
-	ship : "FedEx",
-	sdate : "2007-12-03"
-}, {
-	id : "6",
-	name : "Play Station",
-	note : "note3",
-	stock : "No",
-	ship : "FedEx",
-	sdate : "2007-12-03"
-}, {
-	id : "7",
-	name : "Mobile Telephone",
-	note : "note",
-	stock : "Yes",
-	ship : "ARAMEX",
-	sdate : "2007-12-03"
-}, {
-	id : "8",
-	name : "Server",
-	note : "note2",
-	stock : "Yes",
-	ship : "TNT",
-	sdate : "2007-12-03"
-}, {
-	id : "9",
-	name : "Matrix Printer",
-	note : "note3",
-	stock : "No",
-	ship : "FedEx",
-	sdate : "2007-12-03"
-}, {
-	id : "10",
-	name : "Desktop Computer",
-	note : "note",
-	stock : "Yes",
-	ship : "FedEx",
-	sdate : "2007-12-03"
-}, {
-	id : "11",
-	name : "Laptop",
-	note : "Long text ",
-	stock : "Yes",
-	ship : "InTime",
-	sdate : "2007-12-03"
-}, {
-	id : "12",
-	name : "LCD Monitor",
-	note : "note3",
-	stock : "Yes",
-	ship : "TNT",
-	sdate : "2007-12-03"
-}, {
-	id : "13",
-	name : "Speakers",
-	note : "note",
-	stock : "No",
-	ship : "ARAMEX",
-	sdate : "2007-12-03"
-}, {
-	id : "14",
-	name : "Laser Printer",
-	note : "note2",
-	stock : "Yes",
-	ship : "FedEx",
-	sdate : "2007-12-03"
-}, {
-	id : "15",
-	name : "Play Station",
-	note : "note3",
-	stock : "No",
-	ship : "FedEx",
-	sdate : "2007-12-03"
-}, {
-	id : "16",
-	name : "Mobile Telephone",
-	note : "note",
-	stock : "Yes",
-	ship : "ARAMEX",
-	sdate : "2007-12-03"
-}, {
-	id : "17",
-	name : "Server",
-	note : "note2",
-	stock : "Yes",
-	ship : "TNT",
-	sdate : "2007-12-03"
-}, {
-	id : "18",
-	name : "Matrix Printer",
-	note : "note3",
-	stock : "No",
-	ship : "FedEx",
-	sdate : "2007-12-03"
-}, {
-	id : "19",
-	name : "Matrix Printer",
-	note : "note3",
-	stock : "No",
-	ship : "FedEx",
-	sdate : "2007-12-03"
-}, {
-	id : "20",
-	name : "Desktop Computer",
-	note : "note",
-	stock : "Yes",
-	ship : "FedEx",
-	sdate : "2007-12-03"
-}, {
-	id : "21",
-	name : "Laptop",
-	note : "Long text ",
-	stock : "Yes",
-	ship : "InTime",
-	sdate : "2007-12-03"
-}, {
-	id : "22",
-	name : "LCD Monitor",
-	note : "note3",
-	stock : "Yes",
-	ship : "TNT",
-	sdate : "2007-12-03"
-}, {
-	id : "23",
-	name : "Speakers",
-	note : "note",
-	stock : "No",
-	ship : "ARAMEX",
-	sdate : "2007-12-03"
-} ];
-
 jQuery(function($) {
 
 	var grid_selector = "#grid-table";
@@ -172,7 +9,7 @@ jQuery(function($) {
 		url : "/user/view",
 		datatype : "json",
 		height : 400,
-		colNames : [ ' ', '用户标识', '所属单位', '拥有权限', '用户名称' ],
+		colNames : [ ' ', '用户标识', '登录用户名', '单位名称','归口科室','密码', '角色类型'],
 		colModel : [ {
 			name : 'myac',
 			index : '',
@@ -198,37 +35,61 @@ jQuery(function($) {
 			sorttype : "int",
 			editable : false
 		}, {
+			name : 'username',
+			index : 'username',
+			width : 80,
+			editable : true,
+			editoptions : {
+				required:true,
+				size : "20",
+				maxlength : "30"
+			}
+			},{
+				name : 'realname',
+				index : 'realname',
+				width : 80,
+				editable : true,
+				editoptions : {
+					required:true,
+					size : "20",
+					maxlength : "30"
+				}
+			},{
 			name : 'organizationId',
 			index : 'organizationId',
 			width : 90,
 			editable : true,
 			sorttype : "date",
-			unformat : pickDate
+			edittype:"select",
+			editoptions:{value:"国库支付:国库支付;预算股:预算股;乡财局:乡财局"}
+		}, {
+			name : 'password1',
+			index : 'password1',
+			width : 90,
+			editable : true,
+			hidden:true,
+			editrules: { edithidden: true },
+			align:"center",
 		}, {
 			name : 'roleIds',
 			index : 'roleIds',
 			width : 250,
 			editable : true,
-			editoptions : {
-				size : "20",
-				maxlength : "30"
-			}
-		} , {
-			name : 'username',
-			index : 'username',
-			width : 150,
-			editable : true,
-			editoptions : {
-				size : "20",
-				maxlength : "30"
-			}
-		}],
+			edittype:"select",
+			editoptions:{value:"4:  普通用户;1:  超级管理员;2:  预算股;3:国库支付中心"}
+//			editoptions : {
+//				size : "20",
+//				maxlength : "30"
+//			}
+		} 
+		],
 
 		viewrecords : true,
 		rowNum : 10,
 		rowList : [ 10, 20, 30 ],
 		pager : pager_selector,
 		altRows : true,
+		loadonce:true,
 		// toppager: true,
 
 		multiselect : true,
@@ -247,7 +108,7 @@ jQuery(function($) {
 		},
 
 		editurl : "/user/update",// nothing is saved
-		caption : "jqGrid with inline editing",
+		caption : "用户管理",
 
 		autoScroll : true,
 		autowidth : true
@@ -258,58 +119,80 @@ jQuery(function($) {
 	// jQuery(grid_selector).jqGrid('filterToolbar',{defaultSearch:true,stringResult:true})
 
 	// switch element when editing inline
-	function aceSwitch(cellvalue, options, cell) {
-		setTimeout(function() {
-			$(cell).find('input[type=checkbox]').wrap(
-					'<label class="inline" />').addClass(
-					'ace ace-switch ace-switch-5').after(
-					'<span class="lbl"></span>');
-		}, 0);
-	}
-	// enable datepicker
-	function pickDate(cellvalue, options, cell) {
-		setTimeout(function() {
-			$(cell).find('input[type=text]').datepicker({
-				format : 'yyyy-mm-dd',
-				autoclose : true
-			});
-		}, 0);
-	}
+//	function aceSwitch(cellvalue, options, cell) {
+//		setTimeout(function() {
+//			$(cell).find('input[type=checkbox]').wrap(
+//					'<label class="inline" />').addClass(
+//					'ace ace-switch ace-switch-5').after(
+//					'<span class="lbl"></span>');
+//		}, 0);
+//	}
+	
 
 	//增加用户
-	$("#adduser").click(function() {
-		jQuery(grid_selector).jqGrid('editGridRow', "new", {
-			height : 300,
-			reloadAfterSubmit : false
-		});
-	});
+//	$("#adduser").click(function() {
+//		jQuery(grid_selector).jqGrid('editGridRow', "new", {
+//			height : 300,
+//			reloadAfterSubmit : false
+//		});
+//	});
 	
 	//修改用户
-	$("#edituser").click(function() { 
-			var gr = jQuery(grid_selector).jqGrid('getGridParam', 'selrow');
-			if (gr != null) 
-				jQuery(grid_selector).jqGrid('editGridRow', gr, 
-						{ height : 300, reloadAfterSubmit : false});
-			else 
-				alert("Please Select Row"); 
-			});
+//	$("#edituser").click(function() { 
+//			var gr = jQuery(grid_selector).jqGrid('getGridParam', 'selrow');
+//			if (gr != null) 
+//				jQuery(grid_selector).jqGrid('editGridRow', gr, 
+//						{ height : 300, reloadAfterSubmit : false});
+//			else 
+//				alert("Please Select Row"); 
+//
+//			
+//			
+////			var id = idsArray[0];
+//	        var layerWidth=$(window).width()*0.8 > 600?600:$(window).width()*0.8;
+//	        var layerHeigth=$(window).height()*0.8 > 550?550:$(window).height()*0.8;
+//	        layer.open({
+//	            type: 2,
+////	            content: '<%=request.getContextPath()%>/login/user/getOrgUserInfoById.do?id='+id,
+//	            area: [layerWidth+'px', layerHeigth+'px'],
+//	            title:'修改用户',
+//	            btn:["提  交","取 消"],
+//	            yes:function(index, layero){
+//	                layer.confirm('确定要保存修改好用户吗?', {icon: 3, title:'提示'}, function(index){
+//	                    var iframeWin = window[layero.find('iframe')[0]['name']];
+//	                    if(iframeWin.validatebox()){
+//	                        iframeWin.submitUserInfo();
+//	                    }
+//	                });
+//	            },
+//	            closeBtn: 2
+//	        });
+//			
+//			
+//			});
 	// navButtons
 	jQuery(grid_selector).jqGrid(
 			'navGrid',
 			pager_selector,
 			{ // navbar options
-				edit : false,
+				edit : true,
 				editicon : 'icon-pencil blue',
-				add : false,
+		        edittitle:'编辑',
+				add : true,
 				addicon : 'icon-plus-sign purple',
+				addtitle:"新增",
 				del : true,
 				delicon : 'icon-trash red',
 				search : true,
+				deltitle:'删除',
 				searchicon : 'icon-search orange',
+				searchtitle:'查看',
 				refresh : true,
 				refreshicon : 'icon-refresh green',
+				refreshtitle:'刷新',
 				view : true,
 				viewicon : 'icon-zoom-in grey',
+				viewtitle:"查看详细"
 			},
 			{
 				// edit record form
@@ -381,13 +264,7 @@ jQuery(function($) {
 
 	function style_edit_form(form) {
 		// enable datepicker on "sdate" field and switches for "stock" field
-		form.find('input[name=sdate]').datepicker({
-			format : 'yyyy-mm-dd',
-			autoclose : true
-		}).end().find('input[name=stock]').addClass(
-				'ace ace-switch ace-switch-5').wrap('<label class="inline" />')
-				.after('<span class="lbl"></span>');
-
+		
 		// update buttons classes
 		var buttons = form.next().find('.EditButton .fm-button');
 		buttons.addClass('btn btn-sm').find('[class*="-icon"]').remove();// ui-icon,

@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
-@RequestMapping(value = "/business/payment")
+@RequestMapping(value = "/payment")
 public class PaymentController {
 
     private static final Logger LOG = Logger.getLogger(PaymentController.class.getName());

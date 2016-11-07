@@ -1,179 +1,142 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org">
-	<head>
-		<meta charset="utf-8" />
-		<title>广丰财政局</title>
+<head>
+<meta charset="utf-8" />
+<title>广丰财政局</title>
 
-		<meta name="keywords" content="" />
-		<meta name="description" content="广丰财政局" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="keywords" content="" />
+<meta name="description" content="广丰财政局" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-		<!-- basic styles -->
+<!-- basic styles -->
 
-		<link href="/assets/css/bootstrap.min.css" rel="stylesheet" />
-		<link rel="stylesheet" href="/assets/css/font-awesome.min.css" />
+<link href="/assets/css/bootstrap.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="/assets/css/font-awesome.min.css" />
 
-		<!--[if IE 7]>
+<!--[if IE 7]>
 		  <link rel="stylesheet" href="/assets/css/font-awesome-ie7.min.css" />
 		<![endif]-->
 
-		<!-- page specific plugin styles -->
+<!-- page specific plugin styles -->
 
-		<link rel="stylesheet" href="/assets/css/jquery-ui-1.10.3.full.min.css" />
-		<link rel="stylesheet" href="/assets/css/datepicker.css" />
-		<link rel="stylesheet" href="/assets/css/ui.jqgrid.css" />
+<link rel="stylesheet" href="/assets/css/jquery-ui-1.10.3.full.min.css" />
+<link rel="stylesheet" href="/assets/css/datepicker.css" />
+<link rel="stylesheet" href="/assets/css/ui.jqgrid.css" />
 
-		
-		<!-- ace styles -->
 
-		<link rel="stylesheet" href="/assets/css/ace.min.css" />
-		<link rel="stylesheet" href="/assets/css/ace-rtl.min.css" />
-		<link rel="stylesheet" href="/assets/css/ace-skins.min.css" />
+<!-- ace styles -->
 
-		<!--[if lte IE 8]>
+<link rel="stylesheet" href="/assets/css/ace.min.css" />
+<link rel="stylesheet" href="/assets/css/ace-rtl.min.css" />
+<link rel="stylesheet" href="/assets/css/ace-skins.min.css" />
+
+<!--[if lte IE 8]>
 		  <link rel="stylesheet" href="/assets/css/ace-ie.min.css" />
 		<![endif]-->
 
-		<!-- inline styles related to this page -->
+<!-- inline styles related to this page -->
 
-		<!-- ace settings handler -->
+<!-- ace settings handler -->
 
-		<script src="/assets/js/ace-extra.min.js"></script>
+<script src="/assets/js/ace-extra.min.js"></script>
 
-		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 
-		<!--[if lt IE 9]>
+<!--[if lt IE 9]>
 		<script src="/assets/js/html5shiv.js"></script>
 		<script src="/assets/js/respond.min.js"></script>
 		<![endif]-->
-	</head>
+</head>
 
-	<body>
-		<div th:replace="includes/header :: header"/>
+<body>
+	<div th:replace="includes/header :: header" />
 
-		<div class="main-container" id="main-container">
-			<script type="text/javascript">
+	<div class="main-container" id="main-container">
+		<script type="text/javascript">
 				try{ace.settings.check('main-container' , 'fixed')}catch(e){}
 			</script>
 
-			<div class="main-container-inner">
-				<a class="menu-toggler" id="menu-toggler" href="#">
-					<span class="menu-text"></span>
-				</a>
-				<div th:replace="includes/sidebar :: sidebar"/>
-				
+		<div class="main-container-inner">
+			<a class="menu-toggler" id="menu-toggler" href="#"> <span
+				class="menu-text"></span>
+			</a>
+			<div th:replace="includes/sidebar :: sidebar" />
 
-				<div class="main-content">
-					<div class="breadcrumbs" id="breadcrumbs">
-						<script type="text/javascript">
+
+			<div class="main-content">
+				<div class="breadcrumbs" id="breadcrumbs">
+					<script type="text/javascript">
 							try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
 						</script>
 
-						<ul class="breadcrumb">
-							<li>
-								<i class="icon-home home-icon"></i>
-								<a href="#">Home</a>
-							</li>
+					<ul class="breadcrumb">
+						<li><i class="icon-home home-icon"></i> <a href="#">系统管理</a>
+						</li>						
+						<li class="active">用户管理</li>
+					</ul>
+					<!-- .breadcrumb -->
 
-							<li>
-								<a href="#">Tables</a>
-							</li>
-							<li class="active">jqGrid plugin</li>
-						</ul><!-- .breadcrumb -->
+					
+					<!-- #nav-search -->
+				</div>
 
-						<div class="nav-search" id="nav-search">
-							<form class="form-search">
-								<span class="input-icon">
-									<input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
-									<i class="icon-search nav-search-icon"></i>
-								</span>
-							</form>
-						</div><!-- #nav-search -->
-					</div>
+				<div class="page-content">
 
-					<div class="page-content">
-						
 
-						<div class="row">
-							<div class="col-xs-12">
-								<!-- PAGE CONTENT BEGINS -->
+					<div class="row">
+						<div class="col-xs-12">
+							<!-- PAGE CONTENT BEGINS -->
 
-								<div class="alert alert-info">
-									<i class="icon-hand-right"></i>
-									<input type="BUTTON" id="adduser" value="add" />
+					<!-- 	<div class="alert alert-info">
+								<i class="icon-hand-right"></i> <input type="BUTTON"
+									id="adduser" value="add" /> <input type="BUTTON" id="edituser"
+									value="Edit Selected" />
 
-									 <input type="BUTTON" id="edituser" value="Edit Selected" />
-									
-								</div>
+							</div> -->	
 
-								<table id="grid-table"></table>
+							<table id="grid-table"></table>
 
-								<div id="grid-pager"></div>
-<script type="text/javascript">
+							<div id="grid-pager"></div>
+							<script type="text/javascript">
 									var $path_base = "/";//this will be used in gritter alerts containing images
 								</script>
-							
 
-								<!-- PAGE CONTENT ENDS -->
-							</div><!-- /.col -->
-						</div><!-- /.row -->
-					</div><!-- /.page-content -->
-				</div><!-- /.main-content -->
 
-				<div class="ace-settings-container" id="ace-settings-container">
-					<div class="btn btn-app btn-xs btn-warning ace-settings-btn" id="ace-settings-btn">
-						<i class="icon-cog bigger-150"></i>
+							<!-- PAGE CONTENT ENDS -->
+						</div>
+						<!-- /.col -->
 					</div>
+					<!-- /.row -->
+				</div>
+				<!-- /.page-content -->
+			</div>
+			<!-- /.main-content -->
 
-					<div class="ace-settings-box" id="ace-settings-box">
-						<div>
-							<div class="pull-left">
-								<select id="skin-colorpicker" class="hide">
-									<option data-skin="default" value="#438EB9">#438EB9</option>
-									<option data-skin="skin-1" value="#222A2D">#222A2D</option>
-									<option data-skin="skin-2" value="#C6487E">#C6487E</option>
-									<option data-skin="skin-3" value="#D0D0D0">#D0D0D0</option>
-								</select>
-							</div>
-							<span>&nbsp; 选择皮肤</span>
-						</div>
+			
+			<!-- /#ace-settings-container -->
+		</div>
+		<!-- /.main-container-inner -->
 
-						
-
-						<div>
-							<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-rtl" />
-							<label class="lbl" for="ace-settings-rtl"> 左右切换 (rtl)</label>
-						</div>
-
-						<div>
-							<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-add-container" />
-							<label class="lbl" for="ace-settings-add-container">
-								缩小边框
-								<b>.container</b>
-							</label>
-						</div>
-					</div>
-				</div><!-- /#ace-settings-container -->
-			</div><!-- /.main-container-inner -->
-
-			<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
-				<i class="icon-double-angle-up icon-only bigger-110"></i>
-			</a>
-		</div><!-- /.main-container -->
+		<a href="#" id="btn-scroll-up"
+			class="btn-scroll-up btn btn-sm btn-inverse"> <i
+			class="icon-double-angle-up icon-only bigger-110"></i>
+		</a>
+	</div>
+	<!-- /.main-container -->
 
 
-		
-		
 
-		<!--[if !IE]> -->
 
-		
-			<script src='/assets/js/jquery-2.0.3.min.js'/>
-		
 
-		<!-- <![endif]-->
-<!--[if IE]>
+	<!--[if !IE]> -->
+
+
+	<script src='/assets/js/jquery-2.0.3.min.js' />
+
+
+	<!-- <![endif]-->
+	<!--[if IE]>
 		
  <script src='/assets/js/jquery-1.10.2.min.js'/>
 
@@ -181,25 +144,25 @@
 
 	<!-- <script type="text/javascript">
 			if("ontouchend" in document) document.write("<script src='/assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
-		</script> -->	
-		<script src="/assets/js/bootstrap.min.js"></script>
-		<script src="/assets/js/typeahead-bs2.min.js"></script>
+		</script> -->
+	<script src="/assets/js/bootstrap.min.js"></script>
+	<script src="/assets/js/typeahead-bs2.min.js"></script>
 
-		<!-- page specific plugin scripts -->
+	<!-- page specific plugin scripts -->
 
-		<script src="/assets/js/date-time/bootstrap-datepicker.min.js"></script>
-		<script src="/assets/js/jqGrid/jquery.jqGrid.min.js"></script>
-		<script src="/assets/js/jqGrid/i18n/grid.locale-en.js"></script>
+	<script src="/assets/js/date-time/bootstrap-datepicker.min.js"></script>
+	<script src="/assets/js/jqGrid/jquery.jqGrid.min.js"></script>
+	<script src="/assets/js/jqGrid/i18n/grid.locale-en.js"></script>
 
-		<!-- ace scripts -->
+	<!-- ace scripts -->
 
-		<script src="/assets/js/ace-elements.min.js"></script>
-		<script src="/assets/js/ace.min.js"></script>
+	<script src="/assets/js/ace-elements.min.js"></script>
+	<script src="/assets/js/ace.min.js"></script>
+	<link rel="icon" type="image/x-icon" href="/img/favicon.ico"/>
+	<!-- inline scripts related to this page -->
 
-		<!-- inline scripts related to this page -->
+	<script src="/js/user.js" th:inline="javascript" />
 
-		<script src="/js/user.js" th:inline="javascript"/>
-			
 	<!-- <div style="display:none"><script src='http://v7.cnzz.com/stat.php?id=155540&web_id=155540' language='JavaScript' charset='gb2312'></script></div> -->
 </body>
 </html>

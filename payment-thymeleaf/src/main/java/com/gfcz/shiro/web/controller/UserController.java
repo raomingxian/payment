@@ -7,12 +7,16 @@ import com.gfcz.shiro.service.UserService;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,6 +28,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @RequestMapping("/user")
 public class UserController {
 
+	
+	
     @Autowired
     private UserService userService;
 
@@ -31,16 +37,73 @@ public class UserController {
     private OrganizationService organizationService;
     @Autowired
     private RoleService roleService;
+    
+    @Autowired  
+    private HttpServletRequest request; 
 
     @RequiresPermissions("user:view")
     @RequestMapping(value = "/view",method = RequestMethod.GET)
     public List<User> list() {
 //        model.addAttribute("userList", userService.findAll());
+//        String json = "{total: " + totalPage + ", page: " + page   
+//                + ", records: " + totalRecord + ", rows: [";   
+//        for (int i = index; i < pageSize + index && i < totalRecord; i++) {   
+//            json += "{cell:['ID " + i + "','NAME " + i + "','PHONE " + i   
+//                    + "']}";   
+//            if (i != pageSize + index - 1 && i != totalRecord - 1) {   
+//                json += ",";   
+//            }   
+//        }   
+//        json += "]}";
+    	
+    	
+    	
         return userService.findAll();
     }
+    
+    
+    
+    @RequiresPermissions(value={"user:delete","user:update","user:create"},logical=Logical.OR) 
+    @RequestMapping(value = "/update")
+    public Boolean update(@RequestParam(value = "oper") String oper) {  //@RequestBody 获取实体类
+//        model.addAttribute("userList", userService.findAll());
+    	if("del".equals(oper)){
+//    		String id=request.getParameter("id");
+    		String[] ids=request.getParameter("id").split(",");
+    		for(String id:ids ){
+    			this.delete(Long.valueOf(id));
+    		}
+    		
+    	}else if("add".equals(oper)){
+    		User user=new User();
+    		user.setOrganizationId(Long.valueOf(1)); //request.getParameter("organizationId")
+    		user.setPassword(request.getParameter("password1"));
+    		user.setRoleIdsStr(request.getParameter("roleIds"));
+    		user.setUsername(request.getParameter("username"));
+    		user.setRealname(request.getParameter("realname"));
+    		
+    		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"+request.getParameter("realname"));
+    		userService.createUser(user);
+    	}else if("edit".equals(oper)){
+
+    		User user=new User();
+    		user.setOrganizationId(Long.valueOf(1)); //request.getParameter("organizationId")
+    		user.setPassword(request.getParameter("password1"));
+    		user.setRoleIdsStr(request.getParameter("roleIds"));
+    		user.setUsername(request.getParameter("username"));
+    		user.setRealname(request.getParameter("realname"));
+    		user.setId(Long.valueOf(request.getParameter("id")));
+    		userService.updateUser(user);
+    	}else{
+    		return false;
+    	}
+    	
+        return true;
+    }
+      
+    
 
     @RequiresPermissions("user:create")
-    @RequestMapping(value = "/create", method = RequestMethod.GET)
     public String showCreateForm(Model model) {
         setCommonData(model);
         model.addAttribute("user", new User());
@@ -49,45 +112,33 @@ public class UserController {
     }
 
     @RequiresPermissions("user:create")
-    @RequestMapping(value = "/create", method = RequestMethod.POST)
     public String create(User user, RedirectAttributes redirectAttributes) {
         userService.createUser(user);
         redirectAttributes.addFlashAttribute("msg", "新增成功");
         return "redirect:/user";
     }
 
-    @RequiresPermissions("user:update")
-    @RequestMapping(value = "/update", method = RequestMethod.GET)
-    public String showUpdateForm(@RequestParam("ID") Long id, Model model) {
-        setCommonData(model);
-        model.addAttribute("user", userService.findOne(id));
-        model.addAttribute("op", "修改");
-        return "user/edit";
-    }
+//    @RequiresPermissions("user:update")
+//    public String showUpdateForm(@RequestParam("ID") Long id, Model model) {
+//        setCommonData(model);
+//        model.addAttribute("user", userService.findOne(id));
+//        model.addAttribute("op", "修改");
+//        return "user/edit";
+//    }
+//
+//    @RequiresPermissions("user:update")
+//    public String update(User user, RedirectAttributes redirectAttributes) {
+//        userService.updateUser(user);
+//        redirectAttributes.addFlashAttribute("msg", "修改成功");
+//        return "redirect:/user";
+//    }
 
-    @RequiresPermissions("user:update")
-    @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public String update(User user, RedirectAttributes redirectAttributes) {
-        userService.updateUser(user);
-        redirectAttributes.addFlashAttribute("msg", "修改成功");
-        return "redirect:/user";
-    }
 
-    @RequiresPermissions("user:delete")
-    @RequestMapping(value = "/{id}/delete", method = RequestMethod.GET)
-    public String showDeleteForm(@PathVariable("id") Long id, Model model) {
-        setCommonData(model);
-        model.addAttribute("user", userService.findOne(id));
-        model.addAttribute("op", "删除");
-        return "user/edit";
-    }
 
-    @RequiresPermissions("user:delete")
-    @RequestMapping(value = "/{id}/delete", method = RequestMethod.POST)
-    public String delete(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
-        userService.deleteUser(id);
-        redirectAttributes.addFlashAttribute("msg", "删除成功");
-        return "redirect:/user";
+   
+    public void delete( Long id) {
+    	userService.deleteUser(id);
+        
     }
 
 
