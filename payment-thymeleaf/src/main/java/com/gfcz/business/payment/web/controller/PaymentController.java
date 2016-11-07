@@ -9,25 +9,58 @@ import java.util.List;
 import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-@Controller
+import com.gfcz.business.payment.web.dao.IPaymentDao;
+import com.gfcz.business.payment.web.entity.BusinessPayment;
+
+@RestController
 @RequestMapping(value = "/payment")
 public class PaymentController {
 
+	@Autowired
+	private IPaymentDao iPaymentDao;
+	
     private static final Logger LOG = Logger.getLogger(PaymentController.class.getName());
    
-    @RequestMapping("/")
-    public String PaymentIndex(){
-    	return "payment";
-    }
 
+    /**
+     * 查询预算
+     * @return
+     */
+    @RequestMapping(value = "/11")
+    public Page<BusinessPayment> findPayment(){
+    	PageRequest pageRequest = buildPageRequest(11, 10, "auto");
+    	
+    	return iPaymentDao.findAll(pageRequest);
+    }
+    
+    /**
+     * 创建分页请求.
+     */
+    private PageRequest buildPageRequest(int pageNumber, int pagzSize, String sortType) {
+        Sort sort = null;
+        if ("auto".equals(sortType)) {
+            sort = new Sort(Direction.DESC, "id");
+        } else if ("title".equals(sortType)) {
+            sort = new Sort(Direction.ASC, "moneyUsed");
+        }
+  
+        return new PageRequest(pageNumber - 1, pagzSize, sort);
+    }
 
 
 
