@@ -1,7 +1,9 @@
 package com.gfcz.shiro.web.controller;
 
+import com.gfcz.business.payment.web.dao.IPaymentDao;
+import com.gfcz.business.payment.web.dao.UserIDao;
+import com.gfcz.business.payment.web.entity.SysUser;
 import com.gfcz.shiro.entity.User;
-import com.gfcz.shiro.service.OrganizationService;
 import com.gfcz.shiro.service.RoleService;
 import com.gfcz.shiro.service.UserService;
 
@@ -12,6 +14,10 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,35 +39,39 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private OrganizationService organizationService;
+ 
     @Autowired
     private RoleService roleService;
+    
+	@Autowired
+	private UserIDao userIDao;
     
     @Autowired  
     private HttpServletRequest request; 
 
     @RequiresPermissions("user:view")
     @RequestMapping(value = "/view",method = RequestMethod.GET)
-    public List<User> list() {
-//        model.addAttribute("userList", userService.findAll());
-//        String json = "{total: " + totalPage + ", page: " + page   
-//                + ", records: " + totalRecord + ", rows: [";   
-//        for (int i = index; i < pageSize + index && i < totalRecord; i++) {   
-//            json += "{cell:['ID " + i + "','NAME " + i + "','PHONE " + i   
-//                    + "']}";   
-//            if (i != pageSize + index - 1 && i != totalRecord - 1) {   
-//                json += ",";   
-//            }   
-//        }   
-//        json += "]}";
+    public Page<SysUser> list() {
+    	int page=1;
+    	if(request.getParameter("page")!=null&&!"".equals(request.getParameter("page"))){
+    		page=Integer.valueOf(request.getParameter("page"));
+    	}
     	
+    	PageRequest pageRequest = buildPageRequest(page, 10);
     	
-    	
-        return userService.findAll();
+        return userIDao.findAll(pageRequest);
     }
     
-    
+    /**
+     * 创建分页请求.
+     */
+    private PageRequest buildPageRequest(int pageNumber, int pagzSize) {
+        Sort sort = null;
+        
+        sort = new Sort(Direction.DESC, "id");
+            
+        return new PageRequest(pageNumber - 1, pagzSize, sort);
+    }
     
     @RequiresPermissions(value={"user:delete","user:update","user:create"},logical=Logical.OR) 
     @RequestMapping(value = "/update")
@@ -76,13 +86,11 @@ public class UserController {
     		
     	}else if("add".equals(oper)){
     		User user=new User();
-    		user.setOrganizationId(Long.valueOf(1)); //request.getParameter("organizationId")
+    		user.setOrganizationId(Long.valueOf(request.getParameter("organizationId"))); //request.getParameter("organizationId")
     		user.setPassword(request.getParameter("password1"));
     		user.setRoleIdsStr(request.getParameter("roleIds"));
     		user.setUsername(request.getParameter("username"));
     		user.setRealname(request.getParameter("realname"));
-    		
-    		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"+request.getParameter("realname"));
     		userService.createUser(user);
     	}else if("edit".equals(oper)){
 
@@ -157,9 +165,15 @@ public class UserController {
         redirectAttributes.addFlashAttribute("msg", "修改密码成功");
         return "redirect:/user";
     }
+    
+
+    @RequestMapping(value = "/chackusername/{username}", method = RequestMethod.POST)
+    public Boolean chackUserName(@PathVariable("username") String username) {
+        
+        return userService.chackUserName(username);
+    }
 
     private void setCommonData(Model model) {
-        model.addAttribute("organizationList", organizationService.findAll());
         model.addAttribute("roleList", roleService.findAll());
     }
 }

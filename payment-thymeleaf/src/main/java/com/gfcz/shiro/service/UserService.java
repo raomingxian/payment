@@ -26,6 +26,14 @@ public interface UserService {
     public void changePassword(Long userId, String newPassword);
 
 
+    /**
+     * 查看用户名是否存在
+     * @param userId
+     * @param newPassword
+     */
+    public Boolean chackUserName(String username);
+    
+    
     User findOne(Long userId);
 
     List<User> findAll();

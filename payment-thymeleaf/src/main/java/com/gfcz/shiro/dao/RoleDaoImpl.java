@@ -8,6 +8,7 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.stereotype.Repository;
 
 import com.gfcz.shiro.entity.Role;
+import com.gfcz.shiro.entity.User;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -68,5 +69,23 @@ public class RoleDaoImpl implements RoleDao {
         final String sql = "select id, role, description, resource_ids as resourceIdsStr, available from sys_role";
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper(Role.class));
     }
+    
+    
+    public Boolean chackUserName(String username){
+    	
+    	
+    	final String sql = "SELECT username FROM sys_user aa where aa.username=?";
+        List<User> userList = jdbcTemplate.query(sql, new BeanPropertyRowMapper(User.class), username);
+        
+        
+        if(userList.size() == 0) {
+            return true;
+        }else{
+        	return false;
+        }   	
+    	
+    }
+    
+    
 
 }

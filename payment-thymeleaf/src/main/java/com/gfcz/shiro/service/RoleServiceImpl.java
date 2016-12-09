@@ -65,4 +65,10 @@ public class RoleServiceImpl implements RoleService {
         }
         return resourceService.findPermissions(resourceIds);
     }
+    
+    
+    public Boolean chackUserName(String username){
+    	 return roleDao.chackUserName(username);
+    }
+    
 }

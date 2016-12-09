@@ -9,7 +9,7 @@ jQuery(function($) {
 		url : "/user/view",
 		datatype : "json",
 		height : 400,
-		colNames : [ ' ', '用户标识', '登录用户名', '单位名称','归口科室','密码', '角色类型'],
+		colNames : [  ' ', '用户标识', '登录用户名', '单位名称','归口科室','密码', '角色类型'],
 		colModel : [ {
 			name : 'myac',
 			index : '',
@@ -22,8 +22,7 @@ jQuery(function($) {
 				keys : true,
 
 				delOptions : {
-					recreateForm : true,
-					beforeShowForm : beforeDeleteCallback
+					recreateForm : true
 				},
 			// editformbutton:true, editOptions:{recreateForm: true,
 			// beforeShowForm:beforeEditCallback}
@@ -39,10 +38,86 @@ jQuery(function($) {
 			index : 'username',
 			width : 80,
 			editable : true,
-			editoptions : {
+			editrules:{
 				required:true,
-				size : "20",
-				maxlength : "30"
+				size : "30",
+				minlength : "6",
+				maxlength : "30",
+				custom:true,
+				custom_func:function(value, colname) {
+					if (value.length >20||value.length <6)
+						return [false,"请输入字符长度6到20位"];
+					else{
+					var message="服务器连接失败，请重新登录";
+					var result=false;
+               		$.ajax({
+               			type : "post",
+               			async : false,
+               			url : "/user/chackusername/"+value,
+               			success : function(data) {
+         				if (data != true) {
+         					
+         					message="用户名："+$('#username').val()+"，已经存在";
+         					
+         				}else{
+         					message="";
+        					result=true;
+         				}
+
+         				
+         			},error: function () {
+         				message="服务器连接失败，请重新登录";
+    					
+                    }
+
+               		});
+               		return [result,message];
+					}
+				}
+			},
+			editoptions : {
+//				required:true,
+//				size : "30",
+//				minlength : "6",
+//				maxlength : "30",
+				searchoptions:{sopt:['eq','ne','lt','le','gt','ge']},
+//				custom:true,
+//				custom_func:function(value, colname) {
+//						if (value="admin123123123")
+//						return [false,"Please enter value between 0 and 20"];
+//						else
+//						return [true,""];
+//						}
+				
+//				dataEvents: [
+//				{type:'blur',fn:function(e){
+//					
+//					if($('#username').val().trim()==""){
+//						alert("请输入用户名");
+//						$('#username').focus();
+//					}
+//					
+//					
+//               		$.ajax({
+//               			type : "post",
+//               			async : false,
+//               			url : "/user/chackusername/"+$('#username').val(),
+//               			success : function(data) {
+////               				alert("data:"+data);
+//         				if (data != true) {
+//         					
+//         					alert("用户名："+$('#username').val()+"，已经存在");
+//             				$('#username').val("");
+//             				$('#username').focus();
+//         				}
+//
+//         				
+//         			}
+//
+//               		});
+//					
+//				}}]
+		
 			}
 			},{
 				name : 'realname',
@@ -59,16 +134,21 @@ jQuery(function($) {
 			index : 'organizationId',
 			width : 90,
 			editable : true,
-			sorttype : "date",
+//			sorttype : "date",
 			edittype:"select",
-			editoptions:{value:"国库支付:国库支付;预算股:预算股;乡财局:乡财局"}
+			editoptions:{value:gettypes()},
+//			editoptions:{value:"预算股:预算股;国库股:国库股;行政执法股:行政执法股;教科文股:教科文股;经建股:经建股;农业股:农业股;社保股:社保股;乡财局:乡财局;综合股:综合股;信息中心:信息中心;综改办:综改办;非税收入局:非税收入局"}
+			
 		}, {
 			name : 'password1',
 			index : 'password1',
 			width : 90,
 			editable : true,
 			hidden:true,
-			editrules: { edithidden: true },
+			editrules: { 
+				edithidden: true,
+				required:true
+				},
 			align:"center",
 		}, {
 			name : 'roleIds',
@@ -76,7 +156,7 @@ jQuery(function($) {
 			width : 250,
 			editable : true,
 			edittype:"select",
-			editoptions:{value:"4:  普通用户;1:  超级管理员;2:  预算股;3:国库支付中心"}
+			editoptions:{value:"4:  股室用户;1:  超级管理员;2:  预算股;3:国库支付中心"}
 //			editoptions : {
 //				size : "20",
 //				maxlength : "30"
@@ -86,29 +166,19 @@ jQuery(function($) {
 
 		viewrecords : true,
 		rowNum : 10,
-		rowList : [ 10, 20, 30 ],
 		pager : pager_selector,
 		altRows : true,
-		loadonce:true,
-		// toppager: true,
 
 		multiselect : true,
-		// multikey: "ctrlKey",
 		multiboxonly : true,
-
-		loadComplete : function() {
-			var table = this;
-			setTimeout(function() {
-				styleCheckbox(table);
-
-				updateActionIcons(table);
-				updatePagerIcons(table);
-				enableTooltips(table);
-			}, 0);
+		jsonReader : {
+			root : "content",
+			page : "currpage",
+			total : "totalPages",
+			records : "totalElements"
 		},
-
 		editurl : "/user/update",// nothing is saved
-		caption : "用户管理",
+//		caption : "用户管理",
 
 		autoScroll : true,
 		autowidth : true
@@ -176,77 +246,38 @@ jQuery(function($) {
 			pager_selector,
 			{ // navbar options
 				edit : true,
-				editicon : 'icon-pencil blue',
 		        edittitle:'编辑',
+//		        caption: "编辑", 
 				add : true,
-				addicon : 'icon-plus-sign purple',
 				addtitle:"新增",
 				del : true,
-				delicon : 'icon-trash red',
 				search : true,
 				deltitle:'删除',
-				searchicon : 'icon-search orange',
 				searchtitle:'查看',
 				refresh : true,
-				refreshicon : 'icon-refresh green',
 				refreshtitle:'刷新',
 				view : true,
-				viewicon : 'icon-zoom-in grey',
 				viewtitle:"查看详细"
 			},
 			{
 				// edit record form
 				// closeAfterEdit: true,
-				recreateForm : true,
-				beforeShowForm : function(e) {
-					var form = $(e[0]);
-					form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar')
-							.wrapInner('<div class="widget-header" />')
-					style_edit_form(form);
-				}
+				caption: "编辑", 
+				recreateForm : true
 			},
 			{
 				// new record form
 				closeAfterAdd : true,
 				recreateForm : true,
-				viewPagerButtons : false,
-				beforeShowForm : function(e) {
-					var form = $(e[0]);
-					form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar')
-							.wrapInner('<div class="widget-header" />')
-					style_edit_form(form);
-				}
+				viewPagerButtons : false
 			},
 			{
 				// delete record form
 				recreateForm : true,
-				beforeShowForm : function(e) {
-					var form = $(e[0]);
-					if (form.data('styled'))
-						return false;
-
-					form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar')
-							.wrapInner('<div class="widget-header" />')
-					style_delete_form(form);
-
-					form.data('styled', true);
-				},
-				onClick : function(e) {
-					alert(1);
-				}
 			},
 			{
 				// search form
 				recreateForm : true,
-				afterShowSearch : function(e) {
-					var form = $(e[0]);
-					form.closest('.ui-jqdialog').find('.ui-jqdialog-title')
-							.wrap('<div class="widget-header" />')
-					style_search_form(form);
-				},
-				afterRedraw : function() {
-					style_search_filters($(this));
-				},
 				multipleSearch : true,
 			/**
 			 * multipleGroup:true, showQuery: true
@@ -254,138 +285,61 @@ jQuery(function($) {
 			},
 			{
 				// view record form
-				recreateForm : true,
-				beforeShowForm : function(e) {
-					var form = $(e[0]);
-					form.closest('.ui-jqdialog').find('.ui-jqdialog-title')
-							.wrap('<div class="widget-header" />')
-				}
+				recreateForm : true
 			})
 
-	function style_edit_form(form) {
-		// enable datepicker on "sdate" field and switches for "stock" field
-		
-		// update buttons classes
-		var buttons = form.next().find('.EditButton .fm-button');
-		buttons.addClass('btn btn-sm').find('[class*="-icon"]').remove();// ui-icon,
-																			// s-icon
-		buttons.eq(0).addClass('btn-primary')
-				.prepend('<i class="icon-ok"></i>');
-		buttons.eq(1).prepend('<i class="icon-remove"></i>')
+	
 
-		buttons = form.next().find('.navButton a');
-		buttons.find('.ui-icon').remove();
-		buttons.eq(0).append('<i class="icon-chevron-left"></i>');
-		buttons.eq(1).append('<i class="icon-chevron-right"></i>');
-	}
+			function gettypes() {
 
-	function style_delete_form(form) {
-		var buttons = form.next().find('.EditButton .fm-button');
-		buttons.addClass('btn btn-sm').find('[class*="-icon"]').remove();// ui-icon,
-																			// s-icon
-		buttons.eq(0).addClass('btn-danger').prepend(
-				'<i class="icon-trash"></i>');
-		buttons.eq(1).prepend('<i class="icon-remove"></i>')
-	}
+		// 动态生成select内容
 
-	function style_search_filters(form) {
-		form.find('.delete-rule').val('X');
-		form.find('.add-rule').addClass('btn btn-xs btn-primary');
-		form.find('.add-group').addClass('btn btn-xs btn-success');
-		form.find('.delete-group').addClass('btn btn-xs btn-danger');
-	}
-	function style_search_form(form) {
-		var dialog = form.closest('.ui-jqdialog');
-		var buttons = dialog.find('.EditTable')
-		buttons.find('.EditButton a[id*="_reset"]').addClass(
-				'btn btn-sm btn-info').find('.ui-icon').attr('class',
-				'icon-retweet');
-		buttons.find('.EditButton a[id*="_query"]').addClass(
-				'btn btn-sm btn-inverse').find('.ui-icon').attr('class',
-				'icon-comment-alt');
-		buttons.find('.EditButton a[id*="_search"]').addClass(
-				'btn btn-sm btn-purple').find('.ui-icon').attr('class',
-				'icon-search');
-	}
+		var str = "";
 
-	function beforeDeleteCallback(e) {
-		var form = $(e[0]);
-		if (form.data('styled'))
-			return false;
+		$.ajax({
 
-		form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner(
-				'<div class="widget-header" />')
-		style_delete_form(form);
+			type : "post",
 
-		form.data('styled', true);
-	}
+			async : false,
 
-	function beforeEditCallback(e) {
-		var form = $(e[0]);
-		form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner(
-				'<div class="widget-header" />')
-		style_edit_form(form);
-	}
+			url : "/business/organization/departmentlist",
 
-	// it causes some flicker when reloading or navigating grid
-	// it may be possible to have some custom formatter to do this as the grid
-	// is being created to prevent this
-	// or go back to default browser checkbox styles for the grid
-	function styleCheckbox(table) {
-		/**
-		 * $(table).find('input:checkbox').addClass('ace') .wrap('<label />')
-		 * .after('<span class="lbl align-top" />')
-		 * 
-		 * 
-		 * $('.ui-jqgrid-labels th[id*="_cb"]:first-child')
-		 * .find('input.cbox[type=checkbox]').addClass('ace') .wrap('<label
-		 * />').after('<span class="lbl align-top" />');
-		 */
-	}
+			success : function(data) {
 
-	// unlike navButtons icons, action icons in rows seem to be hard-coded
-	// you can change them like this in here if you want
-	function updateActionIcons(table) {
-		/**
-		 * var replacement = { 'ui-icon-pencil' : 'icon-pencil blue',
-		 * 'ui-icon-trash' : 'icon-trash red', 'ui-icon-disk' : 'icon-ok green',
-		 * 'ui-icon-cancel' : 'icon-remove red' }; $(table).find('.ui-pg-div
-		 * span.ui-icon').each(function(){ var icon = $(this); var $class =
-		 * $.trim(icon.attr('class').replace('ui-icon', '')); if($class in
-		 * replacement) icon.attr('class', 'ui-icon '+replacement[$class]); })
-		 */
-	}
+				if (data != null) {
 
-	// replace icons with FontAwesome icons like above
-	function updatePagerIcons(table) {
-		var replacement = {
-			'ui-icon-seek-first' : 'icon-double-angle-left bigger-140',
-			'ui-icon-seek-prev' : 'icon-angle-left bigger-140',
-			'ui-icon-seek-next' : 'icon-angle-right bigger-140',
-			'ui-icon-seek-end' : 'icon-double-angle-right bigger-140'
-		};
-		$('.ui-pg-table:not(.navtable) > tbody > tr > .ui-pg-button > .ui-icon')
-				.each(
-						function() {
-							var icon = $(this);
-							var $class = $.trim(icon.attr('class').replace(
-									'ui-icon', ''));
+					var jsonobj = eval(data);
 
-							if ($class in replacement)
-								icon.attr('class', 'ui-icon '
-										+ replacement[$class]);
-						})
-	}
+					var length = jsonobj.length;
 
-	function enableTooltips(table) {
-		$('.navtable .ui-pg-button').tooltip({
-			container : 'body'
+					for (var i = 0; i < length; i++) {
+
+						if (i != length - 1) {
+
+							str += jsonobj[i].id + ":"
+									+ jsonobj[i].departmentName + ";";
+
+						} else {
+
+							str += jsonobj[i].id + ":"
+									+ jsonobj[i].departmentName;// 这里是option里面的 value:label
+
+						}
+
+					}
+
+				}
+
+//				alert(str);
+
+			}
+
 		});
-		$(table).find('.ui-pg-div').tooltip({
-			container : 'body'
-		});
-	}
 
+		return str;
+
+	}
+			
 	// var selr = jQuery(grid_selector).jqGrid('getGridParam','selrow');
 
 });

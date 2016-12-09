@@ -116,12 +116,12 @@
             
             $(window).triggerHandler('resize.jqGrid');//trigger window resize to make the grid get the correct size
             // we have to use addJSONData to load the data
-            $("#treegrid")[0].addJSONData({
-                total: 1,
-                page: 1,
-                records: mydata.length,
-                rows: mydata
-            });
+//            $("#treegrid")[0].addJSONData({
+//                total: 1,
+//                page: 1,
+//                records: mydata.length,
+//                rows: mydata
+//            });
             
 //        	//switch element when editing inline
 //			function aceSwitch( cellvalue, options, cell ) {

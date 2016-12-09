@@ -34,14 +34,19 @@ public class PasswordHelper {
 
     public void encryptPassword(User user) {
 
-        user.setSalt(randomNumberGenerator.nextBytes().toHex());
+//        user.setSalt(randomNumberGenerator.nextBytes().toHex());
 
+//        String newPassword = new SimpleHash(
+//                algorithmName,
+//                user.getPassword(),
+//                ByteSource.Util.bytes(user.getCredentialsSalt()),
+//                hashIterations).toHex();
+        
         String newPassword = new SimpleHash(
                 algorithmName,
-                user.getPassword(),
-                ByteSource.Util.bytes(user.getCredentialsSalt()),
-                hashIterations).toHex();
-
+                user.getPassword()).toHex();
+        			
+//        String newPassword =Md5Utils.hash(user.getPassword());
         user.setPassword(newPassword);
     }
 }

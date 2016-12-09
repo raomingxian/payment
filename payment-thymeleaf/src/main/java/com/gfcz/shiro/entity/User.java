@@ -14,7 +14,7 @@ public class User implements Serializable {
     private String username; //用户名
     private String realname; //用户名
     private String password; //密码
-    private String salt; //加密密码的盐
+//    private String salt; //加密密码的盐
     private List<Long> roleIds; //拥有的角色列表
     private Boolean locked = Boolean.FALSE;
 
@@ -58,17 +58,17 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    public String getSalt() {
-        return salt;
-    }
+//    public String getSalt() {
+//        return salt;
+//    }
 
-    public void setSalt(String salt) {
-        this.salt = salt;
-    }
-
-    public String getCredentialsSalt() {
-        return username + salt;
-    }
+//    public void setSalt(String salt) {
+//        this.salt = salt;
+//    }
+//
+//    public String getCredentialsSalt() {
+//        return username + salt;
+//    }
 
     public List<Long> getRoleIds() {
         if(roleIds == null) {
@@ -147,7 +147,7 @@ public class User implements Serializable {
                 ", organizationId=" + organizationId +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
-                ", salt='" + salt + '\'' +
+//                ", salt='" + salt + '\'' +
                 ", roleIds=" + roleIds +
                 ", locked=" + locked +
                 '}';

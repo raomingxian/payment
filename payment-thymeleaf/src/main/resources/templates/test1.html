@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <!-- The jQuery library is a prerequisite for all jqSuite products -->
+    <script type="text/ecmascript" src="/jqgrid/js/jquery.min.js"></script> 
+    <!-- We support more than 40 localizations -->
+    <script type="text/ecmascript" src="/jqgrid/js/trirand/i18n/grid.locale-cn.js"></script>
+    <!-- This is the Javascript file of jqGrid -->   
+    <script type="text/ecmascript" src="/jqgrid/js/trirand/jquery.jqGrid.min.js"></script>
+    
+    
+    <!-- basic styles -->
+
+		<link href="/assets/css/bootstrap.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="/assets/css/font-awesome.min.css" />
+		<link rel="icon" type="image/x-icon" href="/img/favicon.ico"/>
+		<!--[if IE 7]>
+		  <link rel="stylesheet" href="/assets/css/font-awesome-ie7.min.css" />
+		<![endif]-->
+
+		<!-- page specific plugin styles -->
+
+		<link rel="stylesheet" href="/assets/css/jquery-ui-1.10.3.full.min.css" />
+		<link rel="stylesheet" href="/assets/css/datepicker.css" />
+		<link rel="stylesheet" href="/assets/css/ui.jqgrid.css" />
+
+		
+
+		<!-- ace styles -->
+
+		<link rel="stylesheet" href="/assets/css/ace.min.css" />
+		<link rel="stylesheet" href="/assets/css/ace-skins.min.css" />
+    
+    
+    
+    <!-- A link to a Boostrap  and jqGrid Bootstrap CSS siles -->
+	<link rel="stylesheet" href="/jqgrid/css/bootstrap.min.css"/> 
+	<!--<link href="/assets/css/bootstrap.min.css" rel="stylesheet" />-->
+    <link rel="stylesheet" type="text/css" media="screen" href="/jqgrid/css/trirand/ui.jqgrid-bootstrap.css" />
+
+	<script>
+		
+		$.jgrid.defaults.responsive = true;
+		$.jgrid.defaults.styleUI = 'Bootstrap';
+	</script>
+	<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script> --> 
+   <script type="text/ecmascript" src="/jqgrid/js/bootstrap.min.js"></script>
+    
+    	<link rel="stylesheet" href="/assets/css/ace.min.css" /> 
+	<script src="/assets/js/ace-extra.min.js"></script>
+	
+	
+		<!-- ace scripts -->
+
+		<script src="/assets/js/ace-elements.min.js"></script>
+		<script src="/assets/js/ace.min.js"></script>
+		
+		<script src="/assets/js/bootbox.min.js"></script>
+    <meta charset="utf-8" />
+    <title>jqGrid Loading Data - Two Level Hierarchy</title>
+</head>
+<body>
+
+<div th:replace="includes/header :: header"/>
+
+
+
+<div class="main-container" id="main-container">
+			<script type="text/javascript">
+				try{ace.settings.check('main-container' , 'fixed')}catch(e){}
+			</script>
+
+			<div class="main-container-inner">
+				<a class="menu-toggler" id="menu-toggler" href="#">
+					<span class="menu-text"></span>
+				</a>
+
+				<div th:replace="includes/sidebar :: sidebar"/>
+				
+
+				<div class="main-content">
+					<div class="breadcrumbs" id="breadcrumbs">
+						<script type="text/javascript">
+							try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+						</script>
+
+						<ul class="breadcrumb">
+							<li>
+								<i class="icon-home home-icon"></i>
+								<a href="#">主页</a>
+							</li>
+
+							<li>
+								<a href="#">业务管理</a>
+							</li>
+							<li class="active">指标管理</li>
+						</ul><!-- .breadcrumb -->
+
+						<div class="nav-search" id="nav-search">
+							<form class="form-search">
+								<span class="input-icon">
+									<input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
+									<i class="icon-search nav-search-icon"></i>
+								</span>
+							</form>
+						</div><!-- #nav-search -->
+					</div>
+
+					<div class="page-content">
+						
+
+						<div class="row">
+							<div class="col-xs-12">
+								<!-- PAGE CONTENT BEGINS -->
+							<div style="margin-left:20px">
+    <table id="jqGrid"></table>
+    <div id="jqGridPager"></div>
+</div>
+
+								<script type="text/javascript">
+									var $path_base = "/";//this will be used in gritter alerts containing images
+								</script>
+
+								<!-- PAGE CONTENT ENDS -->
+							</div><!-- /.col -->
+						</div><!-- /.row -->
+					</div><!-- /.page-content -->
+				</div><!-- /.main-content -->
+			
+		<!-- <div th:replace="includes/container :: container"/> -->	
+				
+				
+			</div><!-- /.main-container-inner -->
+
+			<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+				<i class="icon-double-angle-up icon-only bigger-110"></i>
+			</a>
+		</div><!-- /.main-container -->
+
+
+    <script type="text/javascript"> 
+    
+        $(document).ready(function () {
+            $("#jqGrid").jqGrid({
+                url: 'data.json',
+                mtype: "GET",
+                datatype: "json",
+                colModel: [
+                    { label: 'ID', name: 'CustomerID', key: true, width: 75 },
+                    { label: 'Company Name', name: 'CompanyName', width: 150 },
+                    { label: 'Contact Name', name: 'ContactName', width: 150 },
+                    { label: 'Phone', name: 'Phone', width: 150 },
+                    { label: 'City', name: 'City', width: 150 }
+                ],
+				loadonce: true,
+				autowidth : true,
+                height: 800,
+                rowNum: 10,
+				sortname: 'CustomerID',
+				jsonReader: {
+					// instruct subgrid to get the data as name:value pair
+					subgrid : { repeatitems: false}
+				},
+                subGrid: true, // set the subGrid property to true to show expand buttons for each row
+				subgridtype: 'json', // set the subgrid type to json
+				subGridUrl: function( params ) { // the url can be a function. In this case we build the urls depending on the id row
+					return params.id+'.json'; 
+				},
+				// description of the subgrid model
+				subGridModel:[{
+						name: ["id","RequiredDate","ShipName","ShipCity","Freight"],
+						width: [60,180,150,100,70],
+						align: ["left","left","left","left","right"],
+						params: false
+				}],
+                pager: "#jqGridPager"
+            });
+        });
+    </script>
+
+    <!-- This code is related to code tabs -->
+    
+</body>
+</html>

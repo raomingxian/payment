@@ -13,4 +13,5 @@ public interface RoleDao {
 
     public Role findOne(Long roleId);
     public List<Role> findAll();
+    public Boolean chackUserName(String username);
 }

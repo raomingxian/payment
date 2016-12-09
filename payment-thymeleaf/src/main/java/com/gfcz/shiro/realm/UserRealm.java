@@ -48,8 +48,9 @@ public class UserRealm extends AuthorizingRealm {
         SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(
                 user.getUsername(), //用户名
                 user.getPassword(), //密码
-//                ByteSource.Util.bytes(user.getCredentialsSalt()),//salt=username+salt
-                getName()  //realm name
+//              user.getId().to,
+//                getName()  //realm name
+                user.getRealname()
         );
         return authenticationInfo;
     }

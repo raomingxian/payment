@@ -96,5 +96,16 @@ public class UserServiceImpl implements UserService {
         }
         return roleService.findPermissions(user.getRoleIds().toArray(new Long[0]));
     }
+    
+    
+    /**
+     * 查看用户名是否存在
+     * @param userId
+     * @param newPassword
+     */
+    public Boolean chackUserName(String username){
+    	
+        return roleService.chackUserName(username);
+    }
 
 }

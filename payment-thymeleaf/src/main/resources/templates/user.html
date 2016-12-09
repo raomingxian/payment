@@ -2,167 +2,98 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="utf-8" />
-<title>广丰财政局</title>
 
-<meta name="keywords" content="" />
-<meta name="description" content="广丰财政局" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
 
-<!-- basic styles -->
+    <title>广丰财政</title>
 
-<link href="/assets/css/bootstrap.min.css" rel="stylesheet" />
-<link rel="stylesheet" href="/assets/css/font-awesome.min.css" />
+    <!-- Bootstrap Core CSS 
+    <link href="/sb/css/bootstrap.min.css" rel="stylesheet"/>-->
+	<link rel="stylesheet" href="/jqgrid/css/bootstrap.min.css"/> 
+    <!-- MetisMenu CSS -->
+    <link href="/sb/css/metisMenu.min.css" rel="stylesheet"/>
 
-<!--[if IE 7]>
-		  <link rel="stylesheet" href="/assets/css/font-awesome-ie7.min.css" />
-		<![endif]-->
+    <!-- Custom CSS -->
+    <link href="/sb/css/sb-admin-2.css" rel="stylesheet"/>
 
-<!-- page specific plugin styles -->
+    <!-- Custom Fonts -->
+    <link href="/sb/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+    
+    <!--<link href="/assets/css/bootstrap.min.css" rel="stylesheet" />-->
+    <link rel="stylesheet" type="text/css" media="screen" href="/jqgrid/css/trirand/ui.jqgrid-bootstrap.css" />
+    
 
-<link rel="stylesheet" href="/assets/css/jquery-ui-1.10.3.full.min.css" />
-<link rel="stylesheet" href="/assets/css/datepicker.css" />
-<link rel="stylesheet" href="/assets/css/ui.jqgrid.css" />
-
-
-<!-- ace styles -->
-
-<link rel="stylesheet" href="/assets/css/ace.min.css" />
-<link rel="stylesheet" href="/assets/css/ace-rtl.min.css" />
-<link rel="stylesheet" href="/assets/css/ace-skins.min.css" />
-
-<!--[if lte IE 8]>
-		  <link rel="stylesheet" href="/assets/css/ace-ie.min.css" />
-		<![endif]-->
-
-<!-- inline styles related to this page -->
-
-<!-- ace settings handler -->
-
-<script src="/assets/js/ace-extra.min.js"></script>
-
-<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-
-<!--[if lt IE 9]>
-		<script src="/assets/js/html5shiv.js"></script>
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      	<script src="/assets/js/html5shiv.js"></script>
 		<script src="/assets/js/respond.min.js"></script>
-		<![endif]-->
+    <![endif]-->
+
 </head>
 
 <body>
-	<div th:replace="includes/header :: header" />
 
-	<div class="main-container" id="main-container">
-		<script type="text/javascript">
-				try{ace.settings.check('main-container' , 'fixed')}catch(e){}
-			</script>
+    <div id="wrapper">
 
-		<div class="main-container-inner">
-			<a class="menu-toggler" id="menu-toggler" href="#"> <span
-				class="menu-text"></span>
-			</a>
-			<div th:replace="includes/sidebar :: sidebar" />
+        <!-- Navigation -->
+        <div th:replace="includes/header1 :: header1"/>
 
+        <!-- Page Content -->
+        <div id="page-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">用户管理</h1>
+                    </div>
+                    
+                    <!-- /.col-lg-12 -->
+                </div>
+                 <div class="row">
+                <div class="col-lg-12">
+                <table id="grid-table"></table>
+				<div id="grid-pager"></div>
+                </div>
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.container-fluid -->
+        </div>
+        <!-- /#page-wrapper -->
 
-			<div class="main-content">
-				<div class="breadcrumbs" id="breadcrumbs">
-					<script type="text/javascript">
-							try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
-						</script>
+    </div>
+    <!-- /#wrapper -->
 
-					<ul class="breadcrumb">
-						<li><i class="icon-home home-icon"></i> <a href="#">系统管理</a>
-						</li>						
-						<li class="active">用户管理</li>
-					</ul>
-					<!-- .breadcrumb -->
+    <!-- jQuery 
+    <script src="/sb/js/jquery.min.js"></script>-->
+	<script type="text/ecmascript" src="/jqgrid/js/jquery.min.js"></script> 
+    <!-- Bootstrap Core JavaScript 
+    <script src="/sb/js/bootstrap.min.js"></script>-->
+	<script type="text/ecmascript" src="/jqgrid/js/bootstrap.min.js"></script>
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="/sb/js/metisMenu.min.js"></script>
 
-					
-					<!-- #nav-search -->
-				</div>
+    <!-- Custom Theme JavaScript -->
+    <script src="/sb/js/sb-admin-2.js"></script>
+    <!-- We support more than 40 localizations -->
+    <script type="text/ecmascript" src="/jqgrid/js/trirand/i18n/grid.locale-cn.js"></script>
+    <!-- This is the Javascript file of jqGrid -->   
+    <script type="text/ecmascript" src="/jqgrid/js/trirand/jquery.jqGrid.min.js"></script>
 
-				<div class="page-content">
-
-
-					<div class="row">
-						<div class="col-xs-12">
-							<!-- PAGE CONTENT BEGINS -->
-
-					<!-- 	<div class="alert alert-info">
-								<i class="icon-hand-right"></i> <input type="BUTTON"
-									id="adduser" value="add" /> <input type="BUTTON" id="edituser"
-									value="Edit Selected" />
-
-							</div> -->	
-
-							<table id="grid-table"></table>
-
-							<div id="grid-pager"></div>
-							<script type="text/javascript">
-									var $path_base = "/";//this will be used in gritter alerts containing images
-								</script>
-
-
-							<!-- PAGE CONTENT ENDS -->
-						</div>
-						<!-- /.col -->
-					</div>
-					<!-- /.row -->
-				</div>
-				<!-- /.page-content -->
-			</div>
-			<!-- /.main-content -->
-
-			
-			<!-- /#ace-settings-container -->
-		</div>
-		<!-- /.main-container-inner -->
-
-		<a href="#" id="btn-scroll-up"
-			class="btn-scroll-up btn btn-sm btn-inverse"> <i
-			class="icon-double-angle-up icon-only bigger-110"></i>
-		</a>
-	</div>
-	<!-- /.main-container -->
-
-
-
-
-
-	<!--[if !IE]> -->
-
-
-	<script src='/assets/js/jquery-2.0.3.min.js' />
-
-
-	<!-- <![endif]-->
-	<!--[if IE]>
 		
- <script src='/assets/js/jquery-1.10.2.min.js'/>
 
-<![endif]-->
+		<!-- inline scripts related to this page -->
 
-	<!-- <script type="text/javascript">
-			if("ontouchend" in document) document.write("<script src='/assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
-		</script> -->
-	<script src="/assets/js/bootstrap.min.js"></script>
-	<script src="/assets/js/typeahead-bs2.min.js"></script>
-
-	<!-- page specific plugin scripts -->
-
-	<script src="/assets/js/date-time/bootstrap-datepicker.min.js"></script>
-	<script src="/assets/js/jqGrid/jquery.jqGrid.min.js"></script>
-	<script src="/assets/js/jqGrid/i18n/grid.locale-en.js"></script>
-
-	<!-- ace scripts -->
-
-	<script src="/assets/js/ace-elements.min.js"></script>
-	<script src="/assets/js/ace.min.js"></script>
-	<link rel="icon" type="image/x-icon" href="/img/favicon.ico"/>
-	<!-- inline scripts related to this page -->
-
-	<script src="/js/user.js" th:inline="javascript" />
-
-	<!-- <div style="display:none"><script src='http://v7.cnzz.com/stat.php?id=155540&web_id=155540' language='JavaScript' charset='gb2312'></script></div> -->
+		<script src="/js/user.js" />
+    	<script>
+		
+		$.jgrid.defaults.responsive = true;
+		$.jgrid.defaults.styleUI = 'Bootstrap';
+	</script>
 </body>
+
 </html>

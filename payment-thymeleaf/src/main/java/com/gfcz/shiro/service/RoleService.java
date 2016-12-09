@@ -21,12 +21,15 @@ public interface RoleService {
      * @param roleIds
      * @return
      */
-    Set<String> findRoles(Long... roleIds);
+    public Set<String> findRoles(Long... roleIds);
 
     /**
      * 根据角色编号得到权限字符串列表
      * @param roleIds
      * @return
      */
-    Set<String> findPermissions(Long[] roleIds);
+    public Set<String> findPermissions(Long[] roleIds);
+    
+    
+    public Boolean chackUserName(String username);
 }

@@ -67,10 +67,10 @@ public class ShiroConfig {
 		bean.setSecurityManager(securityManager());
 		bean.setLoginUrl("/login");
 		bean.setSuccessUrl("/index");
-		Map<String, Filter> filters = Maps.newHashMap();
+//		Map<String, Filter> filters = Maps.newHashMap();
 //		filters.put("perms", urlPermissionsFilter());
 //		filters.put("anon", new AnonymousFilter());
-		bean.setFilters(filters);
+//		bean.setFilters(filters);
 		
 		Map<String, String> chains = Maps.newHashMap();
 		chains.put("/login", "anon");
@@ -81,7 +81,9 @@ public class ShiroConfig {
 		chains.put("/assets/**", "anon");    //静态资源
 		chains.put("/css/**", "anon");    //静态资源
 		chains.put("/js/**", "anon");    //静态资源
+		chains.put("/jqgrid/**", "anon");    //静态资源
 		chains.put("/jquery-treetable/**", "anon");    //静态资源
+		chains.put("/sb/**", "anon");    //静态资源
 		chains.put("/js/**", "anon");    //静态资源
 //		chains.put("/**", "authc,perms");   //auths认证  perms权限 
 		chains.put("/**", "authc"); 

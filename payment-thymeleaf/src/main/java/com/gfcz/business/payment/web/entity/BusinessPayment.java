@@ -5,13 +5,18 @@ import javax.persistence.*;
 import java.util.Date;
 
 
-
+/**
+ * The persistent class for the business_payment database table.
+ * 
+ */
 @Entity
 @Table(name="business_payment")
+@NamedQuery(name="BusinessPayment.findAll", query="SELECT b FROM BusinessPayment b")
 public class BusinessPayment implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 
 	@Column(name="budget_project")
@@ -29,20 +34,17 @@ public class BusinessPayment implements Serializable {
 	@Column(name="functional_class")
 	private String functionalClass;
 
-	@Column(name="manage_department")
-	private String manageDepartment;
-
 	@Column(name="money_sums")
-	private String moneySums;
+	private double moneySums;
 
 	@Column(name="money_used")
-	private String moneyUsed;
+	private double moneyUsed;
 
 	@Column(name="money_useless")
 	private String moneyUseless;
 
 	@Column(name="organization_id")
-	private int organizationId;
+	private String organizationId;
 
 	@Column(name="origin_index")
 	private String originIndex;
@@ -55,8 +57,12 @@ public class BusinessPayment implements Serializable {
 
 	private int state3;
 
-	@Column(name="user_id")
-	private int userId;
+	private String username;
+
+	//bi-directional many-to-one association to Department
+	@ManyToOne
+	@JoinColumn(name="department_id")
+	private Department sysDepartment;
 
 	public BusinessPayment() {
 	}
@@ -109,27 +115,19 @@ public class BusinessPayment implements Serializable {
 		this.functionalClass = functionalClass;
 	}
 
-	public String getManageDepartment() {
-		return this.manageDepartment;
-	}
-
-	public void setManageDepartment(String manageDepartment) {
-		this.manageDepartment = manageDepartment;
-	}
-
-	public String getMoneySums() {
+	public double getMoneySums() {
 		return this.moneySums;
 	}
 
-	public void setMoneySums(String moneySums) {
+	public void setMoneySums(double moneySums) {
 		this.moneySums = moneySums;
 	}
 
-	public String getMoneyUsed() {
+	public double getMoneyUsed() {
 		return this.moneyUsed;
 	}
 
-	public void setMoneyUsed(String moneyUsed) {
+	public void setMoneyUsed(double moneyUsed) {
 		this.moneyUsed = moneyUsed;
 	}
 
@@ -141,11 +139,11 @@ public class BusinessPayment implements Serializable {
 		this.moneyUseless = moneyUseless;
 	}
 
-	public int getOrganizationId() {
+	public String getOrganizationId() {
 		return this.organizationId;
 	}
 
-	public void setOrganizationId(int organizationId) {
+	public void setOrganizationId(String organizationId) {
 		this.organizationId = organizationId;
 	}
 
@@ -189,12 +187,20 @@ public class BusinessPayment implements Serializable {
 		this.state3 = state3;
 	}
 
-	public int getUserId() {
-		return this.userId;
+	public String getUsername() {
+		return this.username;
 	}
 
-	public void setUserId(int userId) {
-		this.userId = userId;
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public Department getSysDepartment() {
+		return this.sysDepartment;
+	}
+
+	public void setSysDepartment(Department sysDepartment) {
+		this.sysDepartment = sysDepartment;
 	}
 
 }

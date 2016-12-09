@@ -27,68 +27,19 @@ DataSourceTree.prototype.data = function(options, callback) {
 };
 
 var tree_data = {
-	'for-sale' : {name: 'For Sale', type: 'folder'}	,
-	'vehicles' : {name: 'Vehicles', type: 'folder'}	,
-	'rentals' : {name: 'Rentals', type: 'folder'}	,
-	'real-estate' : {name: 'Real Estate', type: 'folder'}	,
-	'pets' : {name: 'Pets', type: 'folder'}	,
-	'tickets' : {name: 'Tickets', type: 'item'}	,
-	'services' : {name: 'Services', type: 'item'}	,
-	'personals' : {name: 'Personals', type: 'item'}
+	'for-sale' : {name: '预算管理资金', type: 'folder'}	,
+	'tickets' : {name: '财政专户管理资金', type: 'item'}	,
+	'services' : {name: '其他资金', type: 'item'}
 }
 tree_data['for-sale']['additionalParameters'] = {
 	'children' : {
-		'appliances' : {name: 'Appliances', type: 'item'},
-		'arts-crafts' : {name: 'Arts & Crafts', type: 'item'},
-		'clothing' : {name: 'Clothing', type: 'item'},
-		'computers' : {name: 'Computers', type: 'item'},
-		'jewelry' : {name: 'Jewelry', type: 'item'},
-		'office-business' : {name: 'Office & Business', type: 'item'},
-		'sports-fitness' : {name: 'Sports & Fitness', type: 'item'}
-	}
-}
-tree_data['vehicles']['additionalParameters'] = {
-	'children' : {
-		'cars' : {name: 'Cars', type: 'folder'},
-		'motorcycles' : {name: 'Motorcycles', type: 'item'},
-		'boats' : {name: 'Boats', type: 'item'}
-	}
-}
-tree_data['vehicles']['additionalParameters']['children']['cars']['additionalParameters'] = {
-	'children' : {
-		'classics' : {name: 'Classics', type: 'item'},
-		'convertibles' : {name: 'Convertibles', type: 'item'},
-		'coupes' : {name: 'Coupes', type: 'item'},
-		'hatchbacks' : {name: 'Hatchbacks', type: 'item'},
-		'hybrids' : {name: 'Hybrids', type: 'item'},
-		'suvs' : {name: 'SUVs', type: 'item'},
-		'sedans' : {name: 'Sedans', type: 'item'},
-		'trucks' : {name: 'Trucks', type: 'item'}
+		'appliances' : {name: '公共财政预算资金', type: 'item'},
+		'arts-crafts' : {name: '政府性基金', type: 'item'},
+		'clothing' : {name: '国有资本经营预算资金', type: 'item'},
+		'computers' : {name: '社会保险基金预算资金', type: 'item'}
 	}
 }
 
-tree_data['rentals']['additionalParameters'] = {
-	'children' : {
-		'apartments-rentals' : {name: 'Apartments', type: 'item'},
-		'office-space-rentals' : {name: 'Office Space', type: 'item'},
-		'vacation-rentals' : {name: 'Vacation Rentals', type: 'item'}
-	}
-}
-tree_data['real-estate']['additionalParameters'] = {
-	'children' : {
-		'apartments' : {name: 'Apartments', type: 'item'},
-		'villas' : {name: 'Villas', type: 'item'},
-		'plots' : {name: 'Plots', type: 'item'}
-	}
-}
-tree_data['pets']['additionalParameters'] = {
-	'children' : {
-		'cats' : {name: 'Cats', type: 'item'},
-		'dogs' : {name: 'Dogs', type: 'item'},
-		'horses' : {name: 'Horses', type: 'item'},
-		'reptiles' : {name: 'Reptiles', type: 'item'}
-	}
-}
 
 var treeDataSource = new DataSourceTree({data: tree_data});
 

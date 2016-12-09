@@ -48,9 +48,18 @@ public class IndexController {
     public String paymentcheck() {
         return "paymentcheck";
     }
-    @RequestMapping("/inbox")
-    public String tables() {
-        return "inbox";
+    @RequestMapping("/business/paymentcheckgk")
+    public String paymentcheckgk() {
+        return "paymentcheckgk";
+    }
+    @RequestMapping("/organization")
+    public String organization() {
+        return "organization";
+    }
+     
+    @RequestMapping("/test")
+    public String test() {
+        return "test";
     }
     
     @RequestMapping("/user")
